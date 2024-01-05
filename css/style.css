@@ -1,0 +1,235 @@
+* {
+    font-family: monospace;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #232323;
+    background: linear-gradient(190deg, #000 40%, #282369 100%);
+    overflow-x: hidden;
+    transition: all 1s ease-in-out;
+}
+
+.tabcontent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    transition: all 1s ease-in-out;
+}
+
+main#rockpaperscissors {
+    margin-top: 7rem;
+}
+
+.tablinks {
+    position: absolute;
+    bottom: 3rem;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.tablinks a {
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    transition: all 1s ease-in-out;
+}
+
+.tablinks a.active img {
+    width: 30px;
+    filter: invert(1) drop-shadow(0px 0px 5px blue);
+}
+
+.tablinks a img {
+    width: 30px;
+    filter: grayscale(1);
+}
+
+h1 {
+    margin: 1rem;
+    color: aliceblue;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.choices,
+.bot-choices {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem;
+}
+
+.choice,
+.bot-choice {
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+    text-align: center;
+    margin: 2rem;
+    padding: 2rem;
+    background-color: black;
+    opacity: 0.6;
+    transition: all .2s ease-in-out;
+    box-shadow: 0 0 1px 2px aliceblue;
+    border-radius: 50px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.green {
+    background-image: linear-gradient(65deg, #338864, #33cc64);
+}
+
+.red {
+    background-image: linear-gradient(65deg, #e0115f, #ff445f);
+}
+
+.grey {
+    background-image: linear-gradient(65deg, #8391a1, #a5b3c3);
+}
+
+.avatar {
+    font-size: 40px;
+}
+
+.comm {
+    font-size: 30px;
+}
+
+.outcome {
+    color: aliceblue;
+    font-size: larger;
+}
+
+.reset {
+    color: skyblue;
+    text-decoration: underline;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.footer {
+    display: none;
+    position: fixed;
+    bottom: 2rem;
+    margin: 0 auto;
+    color: #a5b3c3;
+    font-size: smaller;
+    text-align: center;
+}
+
+.score {
+    width: 100%;
+    color: aliceblue;
+    margin: 2rem;
+    font-size: large;
+    text-align: center;
+}
+
+@media screen and (max-width:460px) {
+    main {
+        transform: scale(0.7);
+    }
+}
+
+:root {
+    --border-style: 5px solid lightblue;
+}
+
+main#tictactoe {
+    width: 100%;
+    height: 100vh;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#board {
+    margin: 0 auto;
+    position: relative;
+    width: 70%;
+    height: 35%;
+    grid-area: board;
+    display: grid;
+    grid-auto-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+        "C0 C1 C2"
+        "C3 C4 C5"
+        "C6 C7 C8";
+}
+
+#C0,
+#C1,
+#C2 {
+    border-bottom: var(--border-style);
+}
+
+#C6,
+#C7,
+#C8 {
+    border-top: var(--border-style);
+}
+
+#C0,
+#C3,
+#C6 {
+    border-right: var(--border-style);
+}
+
+#C2,
+#C5,
+#C8 {
+    border-left: var(--border-style);
+}
+
+#selector {
+    position: relative;
+    grid-area: selector;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+#output {
+    font-size: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+}
+
+#icon-circle, #icon-cross {
+    width: 60%;
+    height: 60%;
+    filter: invert(80%) drop-shadow(0px 0px 2px #0073cf);
+}
+
+#icon-cross {
+    filter: invert(40%) drop-shadow(0px 0px 2px #0073cf);
+}
+
+.cell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

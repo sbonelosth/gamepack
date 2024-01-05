@@ -7,15 +7,15 @@ let score = q(".score");
 
 let choiceList = ["rock", "paper", "scissor"];
 let userScore = 0, botScore = 0;
-let input = prompt("The score you aim to reach first, Go:");
 let reset = q(".reset");
+let input = null;
 
 reset.addEventListener("click", () => { input = prompt("New target score:") });
 
 let botChoice, userChoice;
 
 function makeChoice(evt, choice) {
-    let maxScore = (input === null || input === "") ? 10 : parseInt(input);
+    let maxScore = (input === null || input === "") ? 3 : parseInt(input);
 
     for (i = 0; i < choices.length; i++)
         choices[i].classList.remove("green", "red", "grey");
@@ -107,3 +107,18 @@ choices.forEach(choice => {
         makeChoice(event, choice.getAttribute("id"));
     })
 });
+
+function openTab(evt, tabName) {
+  let i, tablinks, tabcontent;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "flex";
+  evt.currentTarget.className += " active";
+}
