@@ -13,7 +13,7 @@ body {
     align-items: center;
     background-color: #232323;
     background: linear-gradient(190deg, #000 40%, #282369 100%);
-    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .main-container {
@@ -26,11 +26,11 @@ body {
 }
 
 h1 {
-    width: 150%;
     margin: 1rem;
     color: aliceblue;
     letter-spacing: 2px;
     text-align: center;
+    overflow: hidden;
 }
 
 .choices {
