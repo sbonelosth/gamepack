@@ -2,16 +2,26 @@ function qA(selecetor) { return document.querySelectorAll(selecetor); }
 function q(selecetor) { return document.querySelector(selecetor); }
 
 let choices = qA(".choice");
+let botChoices = qA(".bot-choice");
 let score = q(".score");
 
 let choiceList = ["rock", "paper", "scissor"];
-var userScore = 0, botScore = 0;
-const maxScore = 10;
-var botChoice, userChoice;
+let userScore = 0, botScore = 0;
+let input = prompt("The score you aim to reach first, Go:");
+let reset = q(".reset");
+
+reset.addEventListener("click", () => { input = prompt("New target score:") });
+
+let botChoice, userChoice;
 
 function makeChoice(evt, choice) {
+    let maxScore = (input === null || input === "") ? 10 : parseInt(input);
+
     for (i = 0; i < choices.length; i++)
         choices[i].classList.remove("green", "red", "grey");
+
+    for (i = 0; i < botChoices.length; i++)
+        botChoices[i].classList.remove("green", "red", "grey");
 
     let bot = Math.floor(Math.random() * 3);
     var i, outcome;
@@ -22,6 +32,7 @@ function makeChoice(evt, choice) {
         botChoice = `${9994 + bot}`;
         userChoice = botChoice;
         evt.currentTarget.classList.add("grey");
+        q("#bot-" + choice).classList.add("grey");
     }
     else if (choice === "rock") {
         userChoice = 9994;
@@ -30,12 +41,14 @@ function makeChoice(evt, choice) {
             botChoice = 9995;
             botScore++;
             evt.currentTarget.classList.add("red");
+            q("#bot-paper").classList.add("green");
         }
         else {
             outcome.innerHTML = "Plus 1 for Me";
             botChoice = 9996;
             userScore++;
             evt.currentTarget.classList.add("green");
+            q("#bot-scissor").classList.add("red");
         }
     }
     else if (choice === "paper") {
@@ -45,12 +58,14 @@ function makeChoice(evt, choice) {
             botChoice = 9994;
             userScore++;
             evt.currentTarget.classList.add("green");
+            q("#bot-rock").classList.add("red");
         }
         else {
             outcome.innerHTML = "Plus 1 for the Bot";
             botChoice = 9996;
             botScore++;
             evt.currentTarget.classList.add("red");
+            q("#bot-scissor").classList.add("green");
         }
     }
     else if (choice === "scissor") {
@@ -60,26 +75,31 @@ function makeChoice(evt, choice) {
             botChoice = 9994;
             botScore++;
             evt.currentTarget.classList.add("red");
+            q("#bot-rock").classList.add("green");
         }
         else {
             outcome.innerHTML = "Plus 1 for Me";
             botChoice = 9995;
             userScore++;
             evt.currentTarget.classList.add("green");
+            q("#bot-paper").classList.add("red");
         }
 
     }
-    score.innerHTML = `&#${botChoice} Bot [ ${botScore} ] : [ ${userScore} ] Me &#${userChoice}`;
+    score.innerHTML = `<span class="comm">&#${botChoice}</span> Bot [ ${botScore} ] : [ ${userScore} ] Me <span class="comm">&#${userChoice}</span>`;
 
     let loss = [128169, 129313, 128528, 128128, 129324, 127770];
     let win = [128526, 128520, 129393, 129398, 128226, 127942];
     let rand = Math.floor(Math.random() * 6);
+
     if (botScore == maxScore || userScore == maxScore) {
-        outcome.innerHTML = (botScore > userScore) ? `Yikes, the bot wins &#${loss[rand]}` : `A win is a win &#${win[rand]}`;
+        outcome.innerHTML = (botScore > userScore) ? `Yikes, the bot wins <span class="comm">&#${loss[rand]}</span>` : `A win is a win <span class="comm">&#${win[rand]}</span>`;
         botScore = 0;
         userScore = 0;
+
+        reset.innerHTML = "Reset target score";
     }
-    
+
 }
 
 choices.forEach(choice => {
