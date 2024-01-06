@@ -12,8 +12,7 @@ body {
     align-items: center;
     background-color: #232323;
     background: linear-gradient(190deg, #000 40%, #282369 100%);
-    overflow-x: hidden;
-    transition: all 1s ease-in-out;
+    overflow-x: hidden; 
 }
 
 .tabcontent, .scale-wrapper {
@@ -21,8 +20,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: transparent;
-    transition: all 1s ease-in-out;
+    background: transparent; 
 }
 
 main#rockpaperscissors {
@@ -43,7 +41,6 @@ main#rockpaperscissors {
     -webkit-tap-highlight-color: transparent;
     text-decoration: none;
     margin: 1.5rem;
-    transition: all 1s ease-in-out;
 }
 
 .tablinks a:hover img {
