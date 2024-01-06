@@ -27,9 +27,9 @@ const rules = [
 
 
 let grid = new Array(9).fill('');
-let currentPlayer = 'X';
+let currentPlayer = 'Me';
 let gameFrozen = false;
-let gameMode = 'PvAI';
+let gameMode = 'Me vs the Bot';
 let gameModeQueue;
 for (let index = 0; index < 9; index++) {
   const cell = document.createElement('div');
@@ -40,9 +40,9 @@ for (let index = 0; index < 9; index++) {
   cell.addEventListener('mousedown', () => {
     if (grid[index].length > 0 || gameFrozen) return;
     grid[index] = currentPlayer;
-    currentPlayer = currentPlayer == 'X' ? 'O' : 'X';
+    currentPlayer = currentPlayer == 'Me' ? 'Bot' : 'Me';
     renderToDOM();
-    if (gameMode == 'PvAI') {
+    if (gameMode == 'Me vs the Bot') {
       update();
       pickAIMove();
       renderToDOM();
@@ -58,8 +58,8 @@ function renderToDOM() {
       cell.removeChild(cell.childNodes[0]);
     if (grid[i] != '')
       cell.appendChild({
-        'X': cross,
-        'O': circle
+        'Me': cross,
+        'Bot': circle
       } [grid[i]].cloneNode(false));
   }
 }
@@ -94,7 +94,7 @@ function reset() {
   setTimeout(() => {
     gameFrozen = false;
     grid = new Array(9).fill('');
-    currentPlayer = 'X';
+    currentPlayer = 'Me';
     if (gameModeQueue) {
       gameMode = gameModeQueue;
       gameModeQueue = undefined;
@@ -108,7 +108,10 @@ function update() {
   const gameState = checkWin();
   if (gameState.finished && !gameState.tie) {
     gameFrozen = true;
-    print(`${gameState.winner} wins this round! <span class="comm">&#128526</span>`);
+    (gameState.winner === 'Me') ?
+    print(`A win is a win<span class="comm-2">&#128526</span>`):
+    print(`The ${gameState.winner} wins<span class="comm-2">&#128169</span>`);
+
     for (let index = 0; index < 9; index++)
       if (!gameState.winCase.includes(index)) {
         let icon = document.getElementById(`C${index}`).childNodes[0];
@@ -123,11 +126,11 @@ function update() {
 }
 
 function pickAIMove() {
-  if (currentPlayer == 'O' && !gameFrozen) {
+  if (currentPlayer == 'Bot' && !gameFrozen) {
     gameFrozen = true;
-    currentPlayer = 'X';
+    currentPlayer = 'Me';
     setTimeout(() => {
-      grid[findBestMove(grid)] = 'O';
+      grid[findBestMove(grid)] = 'Bot';
       gameFrozen = false;
       renderToDOM();
       update();
@@ -136,7 +139,7 @@ function pickAIMove() {
 }
 
 document.getElementById('selector').addEventListener('mousedown', () => {
-  const newGameMode = gameMode == 'PvAI' ? 'PvP' : 'PvAI';
+  const newGameMode = gameMode == 'Me vs the Bot' ? 'Me vs Human' : 'Me vs the Bot';
   gameModeQueue = newGameMode;
   document.getElementById('selector').textContent = newGameMode;
 });

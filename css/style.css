@@ -109,6 +109,11 @@ h1 {
     font-size: 30px;
 }
 
+.comm-2 {
+    font-size: 30px;
+    margin-left: 1rem;
+}
+
 .outcome {
     color: aliceblue;
     font-size: larger;
