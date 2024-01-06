@@ -29,8 +29,8 @@ main#rockpaperscissors {
 }
 
 .tablinks {
-    position: absolute;
-    bottom: 3rem;
+    position: fixed;
+    bottom: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
