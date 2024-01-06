@@ -37,24 +37,22 @@ main#rockpaperscissors {
     align-items: center;
 }
 
-.tablinks a {
+.tablinks img {
+    width: 30px;
+    filter: grayscale(1);
+    cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     text-decoration: none;
     margin: 1.5rem;
 }
 
-.tablinks a:hover img {
+.tablinks img:hover {
     transform: scale(1.1);
 }
 
-.tablinks a.active img {
+.tablinks img.active {
     width: 30px;
     filter: invert(1) drop-shadow(0px 0px 5px blue);
-}
-
-.tablinks a img {
-    width: 30px;
-    filter: grayscale(1);
 }
 
 h1 {
@@ -181,8 +179,8 @@ main#tictactoe {
 #board {
     margin: 0 auto;
     position: relative;
-    width: 70%;
-    height: 35%;
+    width: 20rem;
+    height: 20rem;
     grid-area: board;
     display: grid;
     grid-auto-rows: 1fr 1fr 1fr;

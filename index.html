@@ -17,12 +17,9 @@
         <div class="stars3"></div>
     </div>
     <div class="tablinks">
-        <a href="javascript:void()" class="tablink active" onclick="openTab(event, 'rockpaperscissors')">
-            <img src="./res/rock-paper-scissors.png" alt="thumbnail" />
-        </a>
-        <a href="javascript:void()" class="tablink" onclick="openTab(event, 'tictactoe')">
-            <img src="./res/tic-tac-toe.png" alt="thumbnail" />
-        </a>
+        <img class="tablink active" src="./res/rock-paper-scissors.png" alt="thumbnail"
+            onclick="openTab(event, 'rockpaperscissors')" />
+        <img class="tablink" src="./res/tic-tac-toe.png" alt="thumbnail" onclick="openTab(event, 'tictactoe')" />
     </div>
     <main class="tabcontent" id="rockpaperscissors">
         <h1>Rock Paper Scissors</h1>
@@ -45,15 +42,15 @@
     </main>
     <main class="tabcontent" id="tictactoe">
         <div class="scale-wrapper">
-        <h1>Tic Tac Toe</h1>
-        <span id="diff-label">Playing as a beginner</span>
-        <div id="board"></div>
-        <div class="selector-wrapper">
-            <img src="./res/cross.svg" alt="user">
-            <p id="selector">Me vs the Bot</p>
-            <img id="opp" src="./res/circle.svg" alt="bot">
-        </div>
-        <div id="output"></div>
+            <h1>Tic Tac Toe</h1>
+            <span id="diff-label">Playing as a beginner</span>
+            <div id="board"></div>
+            <div class="selector-wrapper">
+                <img src="./res/cross.svg" alt="user">
+                <p id="selector">Me vs the Bot</p>
+                <img id="opp" src="./res/circle.svg" alt="bot">
+            </div>
+            <div id="output"></div>
         </div>
         <div class="level-wrapper">
             <span class="level">
