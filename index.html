@@ -44,10 +44,22 @@
         <p class="reset"></p>
     </main>
     <main class="tabcontent" id="tictactoe">
+        <div class="scale-wrapper">
         <h1>Tic Tac Toe</h1>
+        <span id="diff-label">Playing as a beginner</span>
         <div id="board"></div>
-        <div id="selector">Me vs the Bot</div>
+        <div class="selector-wrapper">
+            <img src="./res/cross.svg" alt="user">
+            <p id="selector">Me vs the Bot</p>
+            <img id="opp" src="./res/circle.svg" alt="bot">
+        </div>
         <div id="output"></div>
+        </div>
+        <div class="level-wrapper">
+            <span class="level">
+                <img src="./res/pro.png" alt="difficulty level" id="diff-btn">
+            </span>
+        </div>
     </main>
 
     <div class="footer">
@@ -55,6 +67,7 @@
     </div>
     <script src="./js/rockpaperscissors.js"></script>
     <script defer type="module" src="./js/tictactoe.js"></script>
+    <script defer type="module" src="./js/minimax.js"></script>
 </body>
 
 </html>
