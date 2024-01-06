@@ -1,4 +1,4 @@
-* { font-family: monospace; }
+* { font-family: monospace; text-transform: lowercase; }
 
 body {
     width: 100%;
