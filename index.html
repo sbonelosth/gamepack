@@ -16,6 +16,10 @@
         <div class="stars2"></div>
         <div class="stars3"></div>
     </div>
+    
+    <div class="rotate-warning">
+        <h1>rotate the device back to portrait to play</h1>
+    </div>
     <main class="tabcontent" id="rockpaperscissors">
         <h1>Rock Paper Scissors</h1>
         <div class="choices">
@@ -36,34 +40,65 @@
         <p class="reset"></p>
     </main>
     <main class="tabcontent" id="tictactoe">
-        <div class="scale-wrapper">
+        
             <h1>Tic Tac Toe</h1>
-            <span id="diff-label">Playing as a beginner</span>
-            <div id="board"></div>
-            <div class="selector-wrapper">
+            <span id="playing-as">[ beginner ]</span>
+            <div id="ttt-board"></div>
+            <div class="ttt-players-wrapper">
                 <img src="./res/cross.svg" alt="user">
-                <p id="selector">Me vs the Bot</p>
-                <img id="opp" src="./res/circle.svg" alt="bot">
+                <p id="ttt-players">Me vs the Bot</p>
+                <img id="ttt-opponent" src="./res/circle.svg" alt="bot">
             </div>
             <div id="output"></div>
-        </div>
-        <div class="level-wrapper">
-            <span class="level">
-                <img src="./res/pro.png" alt="difficulty level" id="diff-btn">
+        
+        <div class="ttt-level-wrapper">
+            <span class="ttt-level">
+                <img src="./res/pro.png" alt="difficulty level" id="level-btn">
             </span>
         </div>
     </main>
+    <main class="tabcontent" id="sudoku">
+        <h1>Sudoku</h1>
+        <div id="active-level"></div>
+        <br>
+        <div class="progress-wrapper">
+            <div id="error-count">0</div>
+            <div id="timer">0:00</div>
+        </div>
+        <div id="sudoku-board"></div>
+        <br>
+        <div id="digits"></div>
+        <div class="sudoku-level-wrapper" id="sudoku-level-wrapper">
+            <span class="sudoku-level easy">
+                <span class="level-text">easy</span>
+            </span>
+            <span class="sudoku-level fair">
+                <span class="level-text">fair</span>
+            </span>
+            <span class="sudoku-level custom">
+                <span class="level-text">custom</span>
+            </span>
+        </div>
+        <div class="actions">
+            <button id="start-action">start</button>
+            <button id="solve-action" disabled>solve</button>
+            <button id="level-action">level</button>
+        </div>
+        <div id="sudoku-complete"></div>
+    </main>
+
     <div class="tablinks">
         <img class="tablink active" src="./res/rock-paper-scissors.png" alt="thumbnail"
             onclick="openTab(event, 'rockpaperscissors')" />
         <img class="tablink" src="./res/tic-tac-toe.png" alt="thumbnail" onclick="openTab(event, 'tictactoe')" />
+        <img class="tablink" src="./res/sudoku.png" alt="thumbnail" onclick="openTab(event, 'sudoku')" />
     </div>
     <div class="footer">
         <p>abumanga project &#169; copyrights reserved</p>
     </div>
     <script src="./js/rockpaperscissors.js"></script>
+    <script defer type="module" src="./js/sudoku.js"></script>
     <script defer type="module" src="./js/tictactoe.js"></script>
-    <script defer type="module" src="./js/minimax.js"></script>
 </body>
 
 </html>
