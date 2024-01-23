@@ -33,7 +33,7 @@ let gameMode = 'Me vs the Bot';
 let gameModeQueue;
 for (let index = 0; index < 9; index++) {
   const cell = document.createElement('div');
-  document.getElementById('board').appendChild(cell);
+  document.getElementById('ttt-board').appendChild(cell);
   cell.appendChild(new Image());
   cell.id = cell.style.gridArea = `C${index}`;
   cell.className = 'cell';
@@ -138,10 +138,10 @@ function pickAIMove() {
   }
 }
 
-document.getElementById('selector').addEventListener('mousedown', () => {
+document.getElementById('ttt-players').addEventListener('mousedown', () => {
   const newGameMode = gameMode == 'Me vs the Bot' ? 'Me vs Human' : 'Me vs the Bot';
   gameModeQueue = newGameMode;
-  document.getElementById('selector').textContent = newGameMode;
+  document.getElementById('ttt-players').textContent = newGameMode;
 });
 
 export { checkWin };
