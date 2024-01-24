@@ -16,15 +16,14 @@ var holes = Math.floor((Math.random() * 31) + 32);
 var solution = generateGrid();
 var board = digHoles(solution, holes);
 
-window.onload = function () 
+window.addEventListener("DOMContentLoaded", () =>
 {
     const dialog = document.createElement("div");
     dialog.id = "sudoku-dialog";
     id("sudoku-board").appendChild(dialog);
     dialog.innerHTML = "\"And the best way to start is to hit \'Start\'\"<br>~ Michael Scott";
     actionListeners();
-};
-
+});
 
 const startTimerIfStarted = () => {
     id("sudoku-board").innerHTML = "";
@@ -37,8 +36,8 @@ const startTimerIfStarted = () => {
 
 const setSudoku = () =>
 {
-    id("timer").innerText = `${minutes}:${(seconds > 9 ) ? seconds : "0" + seconds}`;
-    id("error-count").innerText = `F:${errorCount} T:${emptyTiles()}`;
+    id("sudoku-timer").innerText = `${minutes}:${(seconds > 9 ) ? seconds : "0" + seconds}`;
+    id("sudoku-moves").innerText = `F:${errorCount} T:${emptyTiles()}`;
     id("sudoku-board").innerText = "";
 
     startAction.removeEventListener("click", startTimerIfStarted);
@@ -111,7 +110,7 @@ function selectDigit()
     selectedDigit.classList.add("selected");
 };
 
-const pickLevel = () =>
+const sudokuLevelPick = () =>
 {
     levelAction.classList.add("started");
     id("sudoku-level-wrapper").style.display = "flex";
@@ -165,7 +164,7 @@ function selectTile()
         {
             errorCount++;
         }
-        id("error-count").innerText = `F:${errorCount} T:${count}`;
+        id("sudoku-moves").innerText = `F:${errorCount} T:${count}`;
     }
 
     if (count == 0)
@@ -195,7 +194,7 @@ function startTimer()
             minutes++;
         }
 
-        id("timer").innerText = `${minutes}:${(seconds > 9 ) ? seconds : "0" + seconds}`;
+        id("sudoku-timer").innerText = `${minutes}:${(seconds > 9 ) ? seconds : "0" + seconds}`;
     
     }, 1000);
 }
@@ -240,6 +239,6 @@ const resetSudoku = () =>
 const actionListeners = () =>
 {
     startAction.addEventListener("click", startTimerIfStarted);
-    levelAction.addEventListener("click", pickLevel);
+    levelAction.addEventListener("click", sudokuLevelPick);
     solveAction.addEventListener("click", solvePuzzle);
 };
