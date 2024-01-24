@@ -544,7 +544,7 @@ button:disabled {
     }
 
     55% {
-        transform: translateY(40vh) rotateZ(60deg);
+        transform: translateY(40vh) rotateZ(80deg);
         opacity: 1;
     }
 
