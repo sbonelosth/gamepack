@@ -1,6 +1,7 @@
 * {
     font-family: monospace;
     text-transform: lowercase;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
