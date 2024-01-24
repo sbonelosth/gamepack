@@ -138,9 +138,11 @@ const flipCard = card =>
         {
             clearInterval(state.loop);
 
-            qa(".card-holder").forEach(card => {
-                card.style.animation = "gravity 2s ease-in forwards";
-            });
+            setTimeout(() => {
+                qa(".card-holder").forEach(card => {
+                    card.style.animation = "gravity 1s ease-in forwards";
+                });
+            }, 2000);
 
             setTimeout(() =>
             {
