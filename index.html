@@ -9,7 +9,6 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>GamePack</title>
 </head>
-
 <body>
     <div class="galaxy">
         <div class="stars1"></div>
@@ -62,13 +61,13 @@
         <div id="active-level"></div>
         <br>
         <div class="progress-wrapper">
-            <div id="error-count">0</div>
-            <div id="timer">0:00</div>
+            <div id="sudoku-moves">0</div>
+            <div id="sudoku-timer">0:00</div>
         </div>
         <div id="sudoku-board"></div>
         <br>
         <div id="digits"></div>
-        <div class="sudoku-level-wrapper" id="sudoku-level-wrapper">
+        <div class="pick-level-wrapper" id="sudoku-level-wrapper">
             <span class="sudoku-level easy">
                 <span class="level-text">easy</span>
             </span>
@@ -86,12 +85,41 @@
         </div>
         <div id="sudoku-complete"></div>
     </main>
+    
+    <main class="tabcontent" id="memory-game">
+        <h1>memory game</h1>
+        <div id="memory-active-level"></div>
+        <div class="progress-wrapper">
+            <div id="memory-moves">0</div>
+            <div id="memory-timer">0:00</div>
+        </div>
+        <div id="memory-board"></div>
+        <div class="actions">
+            <button id="memory-start-action">start</button>
+            <button id="memory-level-action">level</button>
+        </div>
+    
+        <div id="memory-result"></div>
+    
+        <div class="pick-level-wrapper" id="memory-level-wrapper">
+            <span class="memory-level easy">
+                <span class="level-text">easy</span>
+            </span>
+            <span class="memory-level fair">
+                <span class="level-text">fair</span>
+            </span>
+            <span class="memory-level insane">
+                <span class="level-text">insane</span>
+            </span>
+        </div>
+    </main>
 
     <div class="tablinks">
         <img class="tablink active" src="./res/rock-paper-scissors.png" alt="thumbnail"
-            onclick="openTab(event, 'rockpaperscissors')" />
-        <img class="tablink" src="./res/tic-tac-toe.png" alt="thumbnail" onclick="openTab(event, 'tictactoe')" />
-        <img class="tablink" src="./res/sudoku.png" alt="thumbnail" onclick="openTab(event, 'sudoku')" />
+            onclick="openTab(event, 'rockpaperscissors')">
+        <img class="tablink" src="./res/tic-tac-toe.png" alt="thumbnail" onclick="openTab(event, 'tictactoe')">
+        <img class="tablink" src="./res/sudoku.png" alt="thumbnail" onclick="openTab(event, 'sudoku')">
+        <img class="tablink" src="./res/puzzle.png" alt="thumbnail" onclick="openTab(event, 'memory-game')" id="memory-thumbnail">
     </div>
     <div class="footer">
         <p>abumanga project &#169; copyrights reserved</p>
@@ -99,6 +127,6 @@
     <script src="./js/rockpaperscissors.js"></script>
     <script defer type="module" src="./js/sudoku.js"></script>
     <script defer type="module" src="./js/tictactoe.js"></script>
+    <script defer type="module" src="./js/memory.js"></script>
 </body>
-
 </html>
