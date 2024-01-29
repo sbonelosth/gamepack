@@ -38,7 +38,7 @@ for (let index = 0; index < 9; index++)
     document.getElementById("tac-board").appendChild(cell);
     cell.appendChild(new Image());
     cell.id = cell.style.gridArea = `C${index}`;
-    cell.className = "cell";
+    cell.className = "tac-cell";
     cell.addEventListener("mousedown", () =>
     {
         if (grid[index].length > 0 || gameFrozen) return;
