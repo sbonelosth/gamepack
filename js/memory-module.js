@@ -1,6 +1,6 @@
-const emojis = ["🌍", "🪐", "🌕", "🍭", "💎", "🎁", "🧿", "🔮", "🎨", "🎲", "🚀", "🛸", "🦋", "🐞", "❤️", "🌀", "🪺", "🍄", "🐚", "🪹", "🌹", "🌺", "🌼", "🌻", "🪴", "🍁"];
+const emojis = ["🌍", "🍉", "🌕", "🍭", "💎", "🎁", "🧿", "🔮", "🎨", "🎲", "🚀", "⚽️", "🦋", "🐞", "❤️", "🔥", "🪺", "🍄", "🐚", "🍓", "🌹", "🌺", "🌼", "🌻", "🧸", "🍁"];
 
-const pickRandom = (array, items) =>
+function pickRandom(array, items)
 {
     const clonedArray = [...array];
     const randomPicks = [];
@@ -12,9 +12,10 @@ const pickRandom = (array, items) =>
     }
 
     return randomPicks;
-};
+}
 
-const shuffle = array => {
+function shuffle(array)
+{
     const clonedArray = [...array];
 
     for (let index = clonedArray.length - 1; index > 0; index--) {
@@ -23,14 +24,26 @@ const shuffle = array => {
         clonedArray[index] = clonedArray[randomIndex];
         clonedArray[randomIndex] = original;
     }
+    
     return clonedArray;
 }
 
-const reshuffle = (dimensions) =>
+function reshuffle(dimensions)
 {
     const picks = pickRandom(emojis, (dimensions * dimensions) / 2);
     const items = shuffle([...picks, ...picks]);
     return items;
-};
+}
 
-export { reshuffle };
+function mapValue(value, inMin, inMax, outMin, outMax)
+{
+    if (value < inMin || value > inMax) return -100;
+    
+    let ratio = (value - inMin) / (inMax - inMin);
+    let result = outMin + ratio * (outMax - outMin);
+    
+    return result;
+}
+
+
+export { reshuffle, mapValue };
