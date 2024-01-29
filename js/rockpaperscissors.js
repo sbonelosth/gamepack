@@ -1,20 +1,22 @@
-function qA(selecetor) { return document.querySelectorAll(selecetor); }
-function q(selecetor) { return document.querySelector(selecetor); }
+const qa = sel => { return document.querySelectorAll(sel); };
+const q = sel => { return document.querySelector(sel); };
+const id = sel => { return document.getElementById(sel); };
 
-let choices = qA(".choice");
-let botChoices = qA(".bot-choice");
+let choices = qa(".choice");
+let botChoices = qa(".bot-choice");
 let score = q(".score");
 
 let choiceList = ["rock", "paper", "scissor"];
 let userScore = 0, botScore = 0;
-let reset = q(".reset");
+let resetRounds = q(".reset");
 let input = null;
 
-reset.addEventListener("click", () => { input = prompt("New target score:") });
+resetRounds.addEventListener("click", () => { input = prompt("New target score:") });
 
 let botChoice, userChoice;
 
-function makeChoice(evt, choice) {
+function makeChoice(e, choice)
+{
     let maxScore = (input === null || input === "") ? 3 : parseInt(input);
 
     for (i = 0; i < choices.length; i++)
@@ -31,7 +33,7 @@ function makeChoice(evt, choice) {
         outcome.innerHTML = "It's a tie";
         botChoice = `${9994 + bot}`;
         userChoice = botChoice;
-        evt.currentTarget.classList.add("grey");
+        e.currentTarget.classList.add("grey");
         q("#bot-" + choice).classList.add("grey");
     }
     else if (choice === "rock") {
@@ -40,14 +42,14 @@ function makeChoice(evt, choice) {
             outcome.innerHTML = "Plus 1 for the Bot";
             botChoice = 9995;
             botScore++;
-            evt.currentTarget.classList.add("red");
+            e.currentTarget.classList.add("red");
             q("#bot-paper").classList.add("green");
         }
         else {
             outcome.innerHTML = "Plus 1 for Me";
             botChoice = 9996;
             userScore++;
-            evt.currentTarget.classList.add("green");
+            e.currentTarget.classList.add("green");
             q("#bot-scissor").classList.add("red");
         }
     }
@@ -57,14 +59,14 @@ function makeChoice(evt, choice) {
             outcome.innerHTML = "Plus 1 for Me";
             botChoice = 9994;
             userScore++;
-            evt.currentTarget.classList.add("green");
+            e.currentTarget.classList.add("green");
             q("#bot-rock").classList.add("red");
         }
         else {
             outcome.innerHTML = "Plus 1 for the Bot";
             botChoice = 9996;
             botScore++;
-            evt.currentTarget.classList.add("red");
+            e.currentTarget.classList.add("red");
             q("#bot-scissor").classList.add("green");
         }
     }
@@ -74,14 +76,14 @@ function makeChoice(evt, choice) {
             outcome.innerHTML = "Plus 1 for the Bot";
             botChoice = 9994;
             botScore++;
-            evt.currentTarget.classList.add("red");
+            e.currentTarget.classList.add("red");
             q("#bot-rock").classList.add("green");
         }
         else {
             outcome.innerHTML = "Plus 1 for Me";
             botChoice = 9995;
             userScore++;
-            evt.currentTarget.classList.add("green");
+            e.currentTarget.classList.add("green");
             q("#bot-paper").classList.add("red");
         }
 
@@ -97,7 +99,7 @@ function makeChoice(evt, choice) {
         botScore = 0;
         userScore = 0;
 
-        reset.innerHTML = "Reset target score";
+        resetRounds.innerHTML = "Reset target score";
     }
 
 }
@@ -108,19 +110,41 @@ choices.forEach(choice => {
     })
 });
 
-function openTab(evt, tabName)
+function openTab(e, tabName)
 {
     let i, tablinks, tabcontent;
-    tabcontent = document.getElementsByClassName("tabcontent");
+    tabcontent = qa(".tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
 
-    tablinks = document.getElementsByClassName("tablink");
+    tablinks = qa(".tablink");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
 
-    document.getElementById(tabName).style.display = "flex";
-    evt.currentTarget.className += " active";
+    id(tabName).style.display = "flex";
+    e.currentTarget.className += " active";
 }
+
+// a media condition that targets viewports at least 768px wide
+const mediaQuery = window.matchMedia(' (min-width: 768px)');
+
+// an orientation detect-and-act function
+function handleMediaChange(e)
+{
+    if (e.matches) // landscape view 
+    {
+        qa(".tabcontent").forEach(tab => {
+            tab.style.display = "none";
+        });
+    }
+    else // portrait view
+    {
+        qa(".tabcontent").forEach(tab => {
+            openTab(e, tab.id);
+        });
+    }
+}
+
+mediaQuery.addEventListener("change", handleMediaChange);
