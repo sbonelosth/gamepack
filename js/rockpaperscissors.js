@@ -4,14 +4,19 @@ const id = sel => { return document.getElementById(sel); };
 
 let choices = qa(".choice");
 let botChoices = qa(".bot-choice");
-let score = q(".score");
+let score = q(".rps-score");
+let threshold = q("#threshold");
 
 let choiceList = ["rock", "paper", "scissor"];
 let userScore = 0, botScore = 0;
-let resetRounds = q(".reset");
+let resetRounds = q(".reset-rounds");
 let input = null;
 
-resetRounds.addEventListener("click", () => { input = prompt("New target score:") });
+resetRounds.addEventListener("click", () =>
+{
+    input = prompt("New target score:");
+    threshold.textContent = input;
+});
 
 let botChoice, userChoice;
 
@@ -27,7 +32,7 @@ function makeChoice(e, choice)
 
     let bot = Math.floor(Math.random() * 3);
     var i, outcome;
-    outcome = q(".outcome");
+    outcome = q(".rps-outcome");
 
     if (choice === choiceList[bot]) {
         outcome.innerHTML = "It's a tie";
@@ -88,18 +93,15 @@ function makeChoice(e, choice)
         }
 
     }
-    score.innerHTML = `<span class="comm">&#${botChoice}</span> Bot [ ${botScore} ] : [ ${userScore} ] Me <span class="comm">&#${userChoice}</span>`;
+    score.innerHTML = `<span class="result-emoji">&#${botChoice}</span> Bot [ ${botScore} ] : [ ${userScore} ] Me <span class="result-emoji">&#${userChoice}</span>`;
 
     let loss = [128169, 129313, 128528, 128128, 129324, 127770];
     let win = [128526, 128520, 129393, 129398, 128226, 127942];
     let rand = Math.floor(Math.random() * 6);
 
     if (botScore == maxScore || userScore == maxScore) {
-        outcome.innerHTML = (botScore > userScore) ? `Yikes, the bot wins <span class="comm">&#${loss[rand]}</span>` : `A win is a win <span class="comm">&#${win[rand]}</span>`;
-        botScore = 0;
-        userScore = 0;
-
-        resetRounds.innerHTML = "Reset target score";
+        outcome.innerHTML = (botScore > userScore) ? `Yikes, the bot wins <span class="result-emoji">&#${loss[rand]}</span>` : `A win is a win <span class="result-emoji">&#${win[rand]}</span>`;
+        botScore = userScore = 0;
     }
 
 }
@@ -147,4 +149,4 @@ function handleMediaChange(e)
     }
 }
 
-mediaQuery.addEventListener("change", handleMediaChange);
+mediaQuery.addEventListener('change', handleMediaChange);
