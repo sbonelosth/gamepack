@@ -186,8 +186,6 @@ main#shootout {
 #tac-board {
     margin: 0 auto;
     position: relative;
-    width: 11.25em;
-    height: 11.25rem;
     grid-area: board;
     display: grid;
     grid-auto-rows: 1fr 1fr 1fr;
