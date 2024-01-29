@@ -13,16 +13,17 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: #232323;
-    background: linear-gradient(190deg, #000 40%, #282369 100%);
+    background-image: linear-gradient(190deg, #000 40%, #282369 100%);
     overflow-x: hidden;
 }
 
 .tabcontent {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10rem;
+    margin-top: 5rem;
     background: transparent;
 }
 
@@ -56,13 +57,6 @@ body {
 .tablinks img.active {
     width: 30px;
     filter: invert(1) drop-shadow(0px 0px 5px blue);
-}
-
-h1 {
-    margin: 1rem;
-    color: aliceblue;
-    letter-spacing: 2px;
-    text-align: center;
 }
 
 .choices,
@@ -159,10 +153,10 @@ h1 {
     text-align: center;
 }
 
-@media screen and (max-width:1080px) and (max-height:720px) {
+@media screen and (orientation:landscape) {
 
     .tablinks,
-    .tabcontent {
+    main.tabcontent {
         display: none;
     }
 
@@ -170,6 +164,7 @@ h1 {
         display: flex;
     }
 }
+
 
 :root {
     --border-style: 0.25rem solid #169bf3;
@@ -186,7 +181,8 @@ h1 {
 
 main#tictactoe,
 main#sudoku,
-main#memory-game {
+main#memory-game,
+main#shootout {
     width: 100%;
     height: 100%;
     display: none;
@@ -237,7 +233,7 @@ main#memory-game {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    margin-top: 3rem;
+    margin-top: 10rem;
 }
 
 .ttt-players-wrapper img {
@@ -322,16 +318,20 @@ h1,
 #memory-moves,
 #memory-timer,
 #active-level,
-#memory-result {
+#memory-result,
+#shootout-score,
+#goal-status {
     font-weight: bolder;
-    font-size: larger;
+    font-size: large;
     margin: 1rem;
     color: aliceblue;
+    letter-spacing: 1px;
 }
 
 #memory-result {
     margin-top: 3rem;
     font-size: small;
+    text-align: center;
 }
 
 #active-level,
@@ -351,7 +351,8 @@ h1,
     right: 1rem;
 }
 
-.sudoku-level, .memory-level {
+.sudoku-level,
+.memory-level {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -441,9 +442,10 @@ h1,
 #solve-action,
 #level-action,
 #memory-start-action,
-#memory-level-action {
-    width: 69px;
-    height: 44px;
+#memory-level-action,
+#start-shootout {
+    width: 70px;
+    height: 45px;
     background: transparent;
     border: 0;
     outline: 1px solid #169bf3;
@@ -552,4 +554,213 @@ button:disabled {
         transform: translateY(100vh) rotateZ(180deg);
         opacity: 0;
     }
+}
+
+/* shootout style */
+
+#shootout-score {
+    margin: 1rem 0;
+    letter-spacing: 0;
+}
+
+#goal-status {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+#shootout-hint {
+    height: 2rem;
+    color: aliceblue;
+    font-weight: bolder;
+    font-size: small;
+}
+
+.scoreboard {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.score-display {
+    width: 25%;
+    height: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background: royalblue;
+    background-image: radial-gradient(royalblue, #169bf3);
+}
+
+.shootout-progress {
+    width: 37%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.shootout-progress.user {
+    justify-content: flex-start;
+}
+
+.shootout-progress.bot {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+.shootout-progress span {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+    box-shadow: 0 0 2px 1px #169bf3;
+}
+
+.goal-post-container {
+    width: 100%;
+    height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin-top: 3rem;
+    border-bottom: 1px groove #169bf3;
+}
+
+.goal-post {
+    width: 15rem;
+    height: 8rem;
+    display: flex;
+    flex-direction: row;
+    border-top: 8px groove lightgrey;
+    border-left: 8px groove lightgrey;
+    border-right: 8px groove lightgrey;
+    box-sizing: border-box;
+}
+
+.ball-direction {
+    width: 100%;
+    height: 100%;
+    margin: 1px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(22, 255, 243, 0.2);
+    z-index: 10;
+}
+
+#keeper-direction {
+    height: 8rem;
+    position: absolute;
+    font-size: 3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transform: translateX(5rem);
+}
+
+#football {
+    font-size: 2em;
+    transform: translate(0rem, 5rem);
+    padding: 2rem;
+    text-align: center;
+    text-shadow: 0 8px 10px rgba(0, 0, 0, 1);
+}
+
+#shooter-turn {
+    margin: 5rem;
+    font-size: 2em;
+    transition: all 1s ease-in-out;
+}
+
+.actions.shootout {
+    position: absolute;
+    top: 73%;
+}
+
+@keyframes toleft {
+    from {
+        transform: translate(0, 5rem) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-5rem, -5rem) rotate(360deg);
+    }
+}
+
+@keyframes tomiddle {
+    from {
+        transform: translate(0, 5rem) rotate(0deg);
+    }
+
+    to {
+        transform: translate(0, -5rem) rotate(360deg);
+    }
+}
+
+@keyframes toright {
+    from {
+        transform: translate(0, 5rem) rotate(0deg);
+    }
+
+    to {
+        transform: translate(5rem, -5rem) rotate(360deg);
+    }
+}
+
+/* applying the animation to the ball */
+#football.left {
+    animation: toleft 1s linear alternate;
+}
+
+#football.middle {
+    animation: tomiddle 1s linear alternate;
+}
+
+#football.right {
+    animation: toright 1s linear alternate;
+}
+
+@keyframes keepertoleft {
+    from {
+        transform: translateX(5rem);
+    }
+
+    to {
+        transform: translate(0);
+    }
+}
+
+@keyframes keepertomiddle {
+    from {
+        transform: translate(5rem);
+    }
+
+    to {
+        transform: translate(5rem);
+    }
+}
+
+@keyframes keepertoright {
+    from {
+        transform: translate(5rem);
+    }
+
+    to {
+        transform: translate(10rem);
+    }
+}
+
+/* applying goalkeeper animation */
+#keeper-direction.left {
+    animation: keepertoleft 1s linear alternate;
+}
+
+#keeper-direction.middle {
+    animation: keepertomiddle 1s linear alternate;
+}
+
+#keeper-direction.right {
+    animation: keepertoright 1s linear alternate;
 }
