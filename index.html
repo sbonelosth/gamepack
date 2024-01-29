@@ -9,13 +9,14 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>GamePack</title>
 </head>
+
 <body>
     <div class="galaxy">
         <div class="stars1"></div>
         <div class="stars2"></div>
         <div class="stars3"></div>
     </div>
-    
+
     <div class="rotate-warning">
         <h1>rotate the device back to portrait to play</h1>
     </div>
@@ -39,17 +40,17 @@
         <p class="reset"></p>
     </main>
     <main class="tabcontent" id="tictactoe">
-        
-            <h1>Tic Tac Toe</h1>
-            <span id="playing-as">[ beginner ]</span>
-            <div id="ttt-board"></div>
-            <div class="ttt-players-wrapper">
-                <img src="./res/cross.svg" alt="user">
-                <p id="ttt-players">Me vs the Bot</p>
-                <img id="ttt-opponent" src="./res/circle.svg" alt="bot">
-            </div>
-            <div id="output"></div>
-        
+
+        <h1>Tic Tac Toe</h1>
+        <span id="playing-as">[ beginner ]</span>
+        <div id="ttt-board"></div>
+        <div class="ttt-players-wrapper">
+            <img src="./res/cross.svg" alt="user">
+            <p id="ttt-players">human vs the bot</p>
+            <img id="ttt-opponent" src="./res/circle.svg" alt="bot">
+        </div>
+        <div id="output"></div>
+
         <div class="ttt-level-wrapper">
             <span class="ttt-level">
                 <img src="./res/pro.png" alt="difficulty level" id="level-btn">
@@ -85,7 +86,7 @@
         </div>
         <div id="sudoku-complete"></div>
     </main>
-    
+
     <main class="tabcontent" id="memory-game">
         <h1>memory game</h1>
         <div id="memory-active-level"></div>
@@ -98,9 +99,9 @@
             <button id="memory-start-action">start</button>
             <button id="memory-level-action">level</button>
         </div>
-    
+
         <div id="memory-result"></div>
-    
+
         <div class="pick-level-wrapper" id="memory-level-wrapper">
             <span class="memory-level easy">
                 <span class="level-text">easy</span>
@@ -114,19 +115,54 @@
         </div>
     </main>
 
+    <main class="tabcontent" id="shootout">
+        <h1>penalty shootout</h1>
+        <div class="scoreboard">
+            <div class="shootout-progress user" id="user-progress">
+            </div>
+            <div class="score-display">
+                <span class="avatar" id="user-avatar">&#128100</span>
+                <span id="shootout-score">0 : 0</span>
+                <span class="avatar" id="user-avatar">&#128126</span>
+            </div>
+            <div class="shootout-progress bot" id="bot-progress">
+            </div>
+        </div>
+
+        <div id="goal-status">hit start to play</div>
+        <div id="shootout-hint"></div>
+
+        <div class="goal-post-container">
+            <div class="goal-post">
+                <span class="ball-direction" id="left"></span>
+                <span class="ball-direction" id="middle"></span>
+                <span class="ball-direction" id="right"></span>
+                <div id="keeper-direction">🧤</div>
+            </div>
+        </div>
+        <div id="football">&#9917</div>
+        <div id="shooter-turn">&#128100</div>
+
+        <div class="actions shootout">
+            <button id="start-shootout">start</button>
+        </div>
+    </main>
+
     <div class="tablinks">
-        <img class="tablink active" src="./res/rock-paper-scissors.png" alt="thumbnail"
-            onclick="openTab(event, 'rockpaperscissors')">
+        <img class="tablink active" src="./res/rock-paper-scissors.png" alt="thumbnail" onclick="openTab(event, 'rockpaperscissors')">
         <img class="tablink" src="./res/tic-tac-toe.png" alt="thumbnail" onclick="openTab(event, 'tictactoe')">
         <img class="tablink" src="./res/sudoku.png" alt="thumbnail" onclick="openTab(event, 'sudoku')">
-        <img class="tablink" src="./res/puzzle.png" alt="thumbnail" onclick="openTab(event, 'memory-game')" id="memory-thumbnail">
+        <img class="tablink" src="./res/puzzle.png" alt="thumbnail" onclick="openTab(event, 'memory-game')">
+        <img class="tablink" src="./res/football.png" alt="thumbnail" onclick="openTab(event, 'shootout')">
     </div>
     <div class="footer">
         <p>abumanga project &#169; copyrights reserved</p>
     </div>
     <script src="./js/rockpaperscissors.js"></script>
+    <script defer type="module" src="./js/shootout.js"></script>
     <script defer type="module" src="./js/sudoku.js"></script>
     <script defer type="module" src="./js/tictactoe.js"></script>
     <script defer type="module" src="./js/memory.js"></script>
 </body>
+
 </html>
