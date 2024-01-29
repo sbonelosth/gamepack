@@ -1,5 +1,8 @@
 # gamepack
+
 a collection of simple games for the sake of keeping my mind sane in these crazy times.
+
+🌐: https://gamepack.onrender.com
 
 so far the pack includes:
 1. rock paper scissors
