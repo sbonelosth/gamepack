@@ -105,7 +105,7 @@ body {
     font-size: 18px;
 }
 
-.comm-2 {
+.result-emoji {
     font-size: 18px;
     margin-left: 1rem;
 }
@@ -188,7 +188,7 @@ main#shootout {
     display: none;
 }
 
-#ttt-board {
+#tac-board {
     margin: 0 auto;
     position: relative;
     width: 11.25em;
@@ -227,7 +227,7 @@ main#shootout {
     border-left: var(--border-style);
 }
 
-.ttt-players-wrapper {
+.tac-players-wrapper {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -236,17 +236,17 @@ main#shootout {
     margin-top: 10rem;
 }
 
-.ttt-players-wrapper img {
+.tac-players-wrapper img {
     width: 16px;
     margin: 1rem;
     filter: invert(40%) drop-shadow(0 0 2px #169bf3);
 }
 
-.ttt-players-wrapper img#ttt-opponent {
+.tac-players-wrapper img#tac-opponent {
     filter: invert(80%) drop-shadow(0px 0px 2px #169bf3);
 }
 
-#ttt-players {
+#tac-players {
     font-size: 12px;
     font-weight: bold;
     color: aliceblue;
@@ -254,7 +254,7 @@ main#shootout {
     -webkit-tap-highlight-color: transparent;
 }
 
-#output {
+#tac-result {
     font-size: 12px;
     position: relative;
     display: flex;
@@ -263,18 +263,18 @@ main#shootout {
     color: aliceblue;
 }
 
-.ttt-level-wrapper {
+.tac-level-wrapper {
     position: absolute;
     right: 2rem;
     top: 50%;
 }
 
-.ttt-level {
+.tac-level {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 }
 
-.ttt-level img {
+.tac-level img {
     width: 30px;
     filter: drop-shadow(0 0 2px #169bf3);
 }
