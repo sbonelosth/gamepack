@@ -1,4 +1,4 @@
-import { reshuffle } from './memory-module.js';
+import { reshuffle, mapValue } from './memory-module.js';
 
 const id = (sel) => { return document.getElementById(sel); };
 const qa = (sel) => { return document.querySelectorAll(sel); };
@@ -10,9 +10,17 @@ window.addEventListener("DOMContentLoaded", () =>
     widgets.result.innerText = "Pick a level then start flipping";
 });
 
-const resultText = () =>
+const resultText = (totalFlips, dimensions) =>
 {
-    return `You did it 👏`;
+    let totalCards = dimensions * dimensions;
+    let rating = (mapValue(totalFlips, totalCards, 4 * totalCards, 100, -100)).toFixed(0);
+    
+    if (dimensions >= 4 && rating >= 75)
+        return  `Rating: ${rating}%<br><br>You're incredible. Well done. 👏`;
+    else if (dimensions === 2 && rating >= 90)
+        return  `Rating: ${rating}%<br><br>You did it. Well done.  👏`;
+    else
+        return  `Rating: ${rating}%<br><br>Keep on trying 👏`;
 };
 
 const widgets = {
@@ -25,6 +33,7 @@ const widgets = {
 };
 
 const state = {
+    dimensions: 0,
     gameStarted: false,
     flippedCards: 0,
     totalFlips: 0,
@@ -32,7 +41,7 @@ const state = {
     loop: null
 };
 
-const createGame = (dimensions) =>
+function createGame(dimensions)
 {
     if (dimensions % 2 !== 0) throw new Error("The dimension of the board must be an even number.");
 
@@ -84,7 +93,7 @@ function attachEventListeners() {
 }
 
 
-const startGame = () =>
+function startGame()
 {
     state.gameStarted = true;
     widgets.startAction.setAttribute("disabled", true);
@@ -105,9 +114,9 @@ const startGame = () =>
 
         widgets.timer.innerText = `${formattedTime}`;
     }, 1000);
-};
+}
 
-const flipCard = card =>
+function flipCard(card)
 {
     if (!card.classList.contains("flipped") && !card.classList.contains("matched"))
     {
@@ -146,7 +155,7 @@ const flipCard = card =>
 
             setTimeout(() =>
             {
-                widgets.result.innerHTML = resultText();
+                widgets.result.innerHTML = resultText(state.totalFlips, state.dimensions);
 
                 qa(".card-holder.matched").forEach(card => {
                     card.classList.remove("flipped");
@@ -162,18 +171,18 @@ const flipCard = card =>
             }, 3000);
         }
     }
-};
+}
 
 
-const flipBackCards = () =>
+function flipBackCards()
 {
     qa(".card-holder:not(.matched)").forEach(card => {
         card.classList.remove("flipped");
     });
     state.flippedCards = 0;
-};
+}
 
-const memoryLevelPick = () =>
+function memoryLevelPick()
 {
     widgets.levelAction.classList.add("started");
     id("memory-level-wrapper").style.display = "flex";
@@ -187,12 +196,20 @@ const memoryLevelPick = () =>
                 resetGame();
                 const activeLevel = e.currentTarget.className;
                 if (activeLevel.slice(13) === "easy")
+                {
+                    state.dimensions = 2;
                     createGame(2);
-
+                }
                 else if (activeLevel.slice(13) === "fair")
+                {
+                    state.dimensions = 4;
                     createGame(4);
-
-                else createGame(6);
+                }
+                else
+                {
+                    state.dimensions = 6;
+                    createGame(6);
+                }
 
                 widgets.levelAction.classList.remove("started");
                 id("memory-active-level").innerHTML = `[ ${activeLevel.slice(13)} ]`;
@@ -200,9 +217,9 @@ const memoryLevelPick = () =>
             }
         });
     }
-};
+}
 
-const resetGame = () =>
+function resetGame()
 {
     state.gameStarted = false;
     state.flippedCards = 0;
