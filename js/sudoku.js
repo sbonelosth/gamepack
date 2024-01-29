@@ -1,4 +1,4 @@
-import { digHoles, generateGrid } from './sudoku-module.js';
+import { digHoles, generateGrid } from "./sudoku-module.js";
 
 const id = (sel) => { return document.getElementById(sel); };
 const sudokuResult = (winRate) => { return `Rating: ${winRate}%<br><br>Not a lot of people finish everything they start. Well done.<br>You\'re awesome.` }
@@ -25,7 +25,8 @@ window.addEventListener("DOMContentLoaded", () =>
     actionListeners();
 });
 
-const startTimerIfStarted = () => {
+function startTimerIfStarted()
+{
     id("sudoku-board").innerHTML = "";
     id("sudoku-complete").innerHTML = "";
     setSudoku();
@@ -34,7 +35,7 @@ const startTimerIfStarted = () => {
     isStarted = !isStarted;
 };
 
-const setSudoku = () =>
+function setSudoku()
 {
     id("sudoku-timer").innerText = `${minutes}:${(seconds > 9 ) ? seconds : "0" + seconds}`;
     id("sudoku-moves").innerText = `F:${errorCount} T:${emptyTiles()}`;
@@ -42,8 +43,6 @@ const setSudoku = () =>
 
     startAction.removeEventListener("click", startTimerIfStarted);
     
-    // Populating the digits with numbers from 1 to 9
-
     for (let i = 0; i < 9; i++)
     {
         const digit = document.createElement("div");
@@ -53,7 +52,7 @@ const setSudoku = () =>
         id("digits").appendChild(digit);
     }
 
-    // Inflating the board with cells
+    // inflating the board with cells
 
     for (let i = 0; i < 9; i++)
     {
@@ -77,7 +76,7 @@ const setSudoku = () =>
 
 function startSudoku()
 {
-    let digits = document.getElementsByClassName("digit");
+    let digits = cls("digit");
     for (let i = 0; i < digits.length; i++) {
         digits[i].addEventListener("click", selectDigit);
     }
@@ -110,11 +109,11 @@ function selectDigit()
     selectedDigit.classList.add("selected");
 };
 
-const sudokuLevelPick = () =>
+function sudokuLevelPick()
 {
     levelAction.classList.add("started");
     id("sudoku-level-wrapper").style.display = "flex";
-    let levels = document.getElementsByClassName("sudoku-level");
+    let levels = cls("sudoku-level");
     for (let i = 0; i < levels.length; i++)
     {
         levels[i].addEventListener("click", (e) =>
@@ -199,9 +198,9 @@ function startTimer()
     }, 1000);
 }
 
-const solvePuzzle = () => 
+function solvePuzzle()
 {
-    const _tile = document.getElementsByClassName("sudoku-tile");
+    const _tile = cls("sudoku-tile");
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
             for (let k = 0; k < 9; k++) {
@@ -213,7 +212,7 @@ const solvePuzzle = () =>
     resetSudoku();
 }
 
-const resetSudoku = () =>
+function resetSudoku()
 {
     clearInterval(timer);
 
@@ -234,11 +233,11 @@ const resetSudoku = () =>
     levelAction.removeAttribute("disabled");
 
     id("active-level").innerText = "";
-};
+}
 
-const actionListeners = () =>
+function actionListeners()
 {
     startAction.addEventListener("click", startTimerIfStarted);
     levelAction.addEventListener("click", sudokuLevelPick);
     solveAction.addEventListener("click", solvePuzzle);
-};
+}
