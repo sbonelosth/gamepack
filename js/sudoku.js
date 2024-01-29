@@ -1,6 +1,8 @@
 import { digHoles, generateGrid } from "./sudoku-module.js";
 
 const id = (sel) => { return document.getElementById(sel); };
+const cls = (sel) => { return document.getElementsByClassName(sel); };
+
 const sudokuResult = (winRate) => { return `Rating: ${winRate}%<br><br>Not a lot of people finish everything they start. Well done.<br>You\'re awesome.` }
 
 const startAction = id("start-action");
