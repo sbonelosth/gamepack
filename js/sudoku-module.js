@@ -127,7 +127,7 @@ const displayGrid = () =>
     console.log(grid);
 };
 
-// a function to dig holes in a and replace random values with 0
+// a function to dig holes in a grid and replace random values with 0
 function digHoles(array, holes)
 {
     let newArray = array.map(row => row.slice());
