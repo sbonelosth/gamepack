@@ -1,4 +1,4 @@
-const getColumn = (colNumber, lines) =>
+function getColumn(colNumber, lines)
 {
     const col = [];
     for (let i = 0; i < lines.length; ++i)
@@ -7,9 +7,9 @@ const getColumn = (colNumber, lines) =>
         col.push(line[colNumber]);
     }
     return col;
-};
+}
 
-const getAllowed = (column, picks) =>
+function getAllowed(column, picks)
 {
     const choosable = [];
     for (let i = 0; i < picks.length; ++i)
@@ -21,7 +21,7 @@ const getAllowed = (column, picks) =>
         }
     }
     return choosable;
-};
+}
 
 function getSquare(colNumber, lineNumber, lines)
 {
@@ -52,7 +52,7 @@ function getSquare(colNumber, lineNumber, lines)
     return detected;
 }
 
-const generateRandomLine = (lines) =>
+function generateRandomLine(lines)
 {
     const line = [];
     let selectables = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -62,10 +62,10 @@ const generateRandomLine = (lines) =>
 
         let allowed;
 
-        // Remove column items
+        // remove column items
         allowed = getAllowed(column, [1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
-        // Remove line items
+        // remove line items
         allowed = getAllowed(line, allowed);
 
         // remove square items
@@ -85,9 +85,9 @@ const generateRandomLine = (lines) =>
     }
 
     return line;
-};
+}
 
-const generateGrid = () =>
+function generateGrid()
 {
     let iterations;
     do
@@ -100,7 +100,6 @@ const generateGrid = () =>
             if (iterations > 500)
             {
                 iterations = -1;
-                // Invalid
                 break;
             }
 
@@ -120,8 +119,7 @@ const generateGrid = () =>
         }
 
     } while (true);
-
-};
+}
 
 const displayGrid = () =>
 {
@@ -129,11 +127,10 @@ const displayGrid = () =>
     console.log(grid);
 };
 
-// A function to dig holes in a and replace random values with 0
+// a function to dig holes in a and replace random values with 0
 function digHoles(array, holes)
 {
     let newArray = array.map(row => row.slice());
-    // Number of holes to dig
     holes = (parseInt(holes) > 80 || holes <= null) ? 63 : holes;
     let dug = new Set();
     for (let i = 0; i < holes; i++)
