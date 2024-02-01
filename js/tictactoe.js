@@ -30,7 +30,6 @@ let grid = new Array(9).fill("");
 let currentPlayer = "human";
 let gameFrozen = false;
 let gameMode = "human vs bot";
-let gameModeQueue;
 
 for (let index = 0; index < 9; index++)
 {
@@ -109,11 +108,6 @@ function reset()
         gameFrozen = false;
         grid = new Array(9).fill("");
         currentPlayer = "human";
-        if (gameModeQueue)
-        {
-            gameMode = gameModeQueue;
-            gameModeQueue = undefined;
-        }
         renderToDOM();
         print(null);
     }, DELAY / 3);
@@ -129,7 +123,7 @@ function update()
         if (gameState.winner === "human")
             print(`a win is a win<span class="result-emoji">&#128526</span>`);
         else
-            print(`${gameState.winner} wins<span class="result-emoji">&#128169</span>`);
+            print(`the bot wins<span class="result-emoji">&#128169</span>`);
 
         for (let index = 0; index < 9; index++)
         {
@@ -168,7 +162,7 @@ function pickAIMove()
 document.getElementById("tac-players").addEventListener("mousedown", () =>
 {
     const newGameMode = gameMode == "human vs bot" ? "human vs human" : "human vs bot";
-    gameModeQueue = newGameMode;
+    gameMode = newGameMode;
     document.getElementById("tac-players").textContent = newGameMode;
 });
 
