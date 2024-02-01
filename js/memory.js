@@ -194,22 +194,36 @@ function memoryLevelPick()
             if (e.currentTarget)
             {
                 resetGame();
+                let DELAY;
                 const activeLevel = e.currentTarget.className;
                 if (activeLevel.slice(13) === "easy")
                 {
                     state.dimensions = 2;
                     createGame(2);
+                    DELAY = 0;
                 }
                 else if (activeLevel.slice(13) === "fair")
                 {
                     state.dimensions = 4;
                     createGame(4);
+                    DELAY = 1200;
                 }
                 else
                 {
                     state.dimensions = 6;
                     createGame(6);
+                    DELAY = 2000;
                 }
+                
+                qa(".card-holder").forEach(card => {
+                    card.classList.add("flipped");
+                });
+                
+                setTimeout(() => {
+                    qa(".card-holder").forEach(card => {
+                        card.classList.remove("flipped");
+                    });
+                }, DELAY);
 
                 widgets.levelAction.classList.remove("started");
                 id("memory-active-level").innerHTML = `[ ${activeLevel.slice(13)} ]`;
