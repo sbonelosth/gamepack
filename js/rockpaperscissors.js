@@ -34,40 +34,47 @@ function makeChoice(e, choice)
     var i, outcome;
     outcome = q(".rps-outcome");
 
-    if (choice === choiceList[bot]) {
+    if (choice === choiceList[bot])
+    {
         outcome.innerHTML = "It's a tie";
         botChoice = `${9994 + bot}`;
         userChoice = botChoice;
         e.currentTarget.classList.add("grey");
         q("#bot-" + choice).classList.add("grey");
     }
-    else if (choice === "rock") {
+    else if (choice === "rock")
+    {
         userChoice = 9994;
-        if (choiceList[bot] === "paper") {
+        if (choiceList[bot] === "paper")
+        {
             outcome.innerHTML = "Plus 1 for the Bot";
             botChoice = 9995;
             botScore++;
             e.currentTarget.classList.add("red");
             q("#bot-paper").classList.add("green");
         }
-        else {
-            outcome.innerHTML = "Plus 1 for Me";
+        else
+        {
+            outcome.innerHTML = "Plus 1 for You";
             botChoice = 9996;
             userScore++;
             e.currentTarget.classList.add("green");
             q("#bot-scissor").classList.add("red");
         }
     }
-    else if (choice === "paper") {
+    else if (choice === "paper")
+    {
         userChoice = 9995;
-        if (choiceList[bot] === "rock") {
-            outcome.innerHTML = "Plus 1 for Me";
+        if (choiceList[bot] === "rock")
+        {
+            outcome.innerHTML = "Plus 1 for You";
             botChoice = 9994;
             userScore++;
             e.currentTarget.classList.add("green");
             q("#bot-rock").classList.add("red");
         }
-        else {
+        else
+        {
             outcome.innerHTML = "Plus 1 for the Bot";
             botChoice = 9996;
             botScore++;
@@ -75,23 +82,25 @@ function makeChoice(e, choice)
             q("#bot-scissor").classList.add("green");
         }
     }
-    else if (choice === "scissor") {
+    else if (choice === "scissor")
+    {
         userChoice = 9996;
-        if (choiceList[bot] === "rock") {
+        if (choiceList[bot] === "rock")
+        {
             outcome.innerHTML = "Plus 1 for the Bot";
             botChoice = 9994;
             botScore++;
             e.currentTarget.classList.add("red");
             q("#bot-rock").classList.add("green");
         }
-        else {
-            outcome.innerHTML = "Plus 1 for Me";
+        else
+        {
+            outcome.innerHTML = "Plus 1 for You";
             botChoice = 9995;
             userScore++;
             e.currentTarget.classList.add("green");
             q("#bot-paper").classList.add("red");
         }
-
     }
     score.innerHTML = `<span class="result-emoji">&#${botChoice}</span> Bot [ ${botScore} ] : [ ${userScore} ] Me <span class="result-emoji">&#${userChoice}</span>`;
 
@@ -99,17 +108,18 @@ function makeChoice(e, choice)
     let win = [128526, 128520, 129393, 129398, 128226, 127942];
     let rand = Math.floor(Math.random() * 6);
 
-    if (botScore == maxScore || userScore == maxScore) {
+    if (botScore == maxScore || userScore == maxScore)
+    {
         outcome.innerHTML = (botScore > userScore) ? `Yikes, the bot wins <span class="result-emoji">&#${loss[rand]}</span>` : `A win is a win <span class="result-emoji">&#${win[rand]}</span>`;
         botScore = userScore = 0;
     }
-
 }
 
-choices.forEach(choice => {
+choices.forEach(choice =>
+{
     choice.addEventListener("click", (event) => {
         makeChoice(event, choice.getAttribute("id"));
-    })
+    });
 });
 
 function openTab(e, tabName)
@@ -149,4 +159,4 @@ function handleMediaChange(e)
     }
 }
 
-mediaQuery.addEventListener('change', handleMediaChange);
+mediaQuery.addEventListener("change", handleMediaChange);
