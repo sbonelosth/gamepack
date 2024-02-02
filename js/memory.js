@@ -84,12 +84,20 @@ function startGameHandler()
     widgets.levelAction.setAttribute("disabled", true);
 }
 
-function attachEventListeners() {
-    const cards = document.querySelectorAll(".card-holder");
-    for (let card of cards) {
+function attachEventListeners()
+{
+    qa(".card-holder").forEach(card => {
         card.addEventListener("click", flipCardHandler);
-    }
+    });
+    
     widgets.startAction.addEventListener("click", startGameHandler);
+}
+
+function detachCardListeners()
+{
+    qa(".card-holder").forEach(card => {
+        card.removeEventListener("click", flipCardHandler);
+    });
 }
 
 
@@ -132,15 +140,19 @@ function flipCard(card)
 
         if (state.flippedCards === 2)
         {
-            const flippedCards = document.querySelectorAll(".flipped:not(.matched)");
+            const flippedCards = qa(".flipped:not(.matched)");
 
             if (flippedCards[0].innerText === flippedCards[1].innerText)
             {
                 flippedCards[0].classList.add("matched");
                 flippedCards[1].classList.add("matched");
+                detachCardListeners();
             }
 
-            setTimeout(() => { flipBackCards(); }, 1000);
+            setTimeout(() => {
+                flipBackCards();
+                attachEventListeners();
+            }, 1000);
         }
 
         if (!qa(".card-holder:not(.flipped)").length)
@@ -179,6 +191,9 @@ function flipBackCards()
     qa(".card-holder:not(.matched)").forEach(card => {
         card.classList.remove("flipped");
     });
+    
+    detachCardListeners();
+    
     state.flippedCards = 0;
 }
 
