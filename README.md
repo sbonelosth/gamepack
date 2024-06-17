@@ -1,6 +1,6 @@
 # gamepack
 
-a collection of simple games for the sake of keeping my mind sane in these crazy times.
+a collection of simple games requested by my little sister, which turned out to be good for the sake of keeping my mind busy. the game is not playable on landscape mode or any device screen other than a smartphone.
 
 🌐: https://gamepack.onrender.com
 
@@ -18,4 +18,4 @@ https://github.com/Red1082/Tic-Tac-Toe
 https://youtu.be/S4uRtTb8U-U?si=ZLDFJ2IgCPH1yT_y
 https://webtips.dev/memory-game-in-javascript
 
-and of course, bing.
+and of course, bing (Copilot).
