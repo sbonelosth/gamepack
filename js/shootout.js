@@ -22,35 +22,33 @@ let botTurn = 0;
 let isUserShooter = true;
 let isGameStarted = false;
 
+const userIcon = '../res/user.svg';
+const botIcon = '../res/bot.svg';
+
 const span = (elem) => { return `<span>${elem}</span>`; };
 // a function to update the score display
-function updateScore()
-{
+function updateScore() {
     scoreDisplay.textContent = `${userScore} : ${botScore}`;
 }
 
 // a function to update the goal status
-function updateGoalStatus(message)
-{
+function updateGoalStatus(message) {
     goalStatus.innerHTML = message;
 }
 
 // a function to reset the ball directions
-function resetBallDirections()
-{
+function resetBallDirections() {
     for (let direction of ballDirections) direction.classList.remove("selected-direction");
 }
 
 // a function to get a random direction
-function getRandomDirection()
-{
+function getRandomDirection() {
     let index = Math.floor(Math.random() * DIRECTIONS.length);
     return DIRECTIONS[index];
 }
 
 // a function to handle the start button click
-function startGame()
-{
+function startGame() {
     // reset the shootout state
     userScore = 0;
     botScore = 0;
@@ -58,7 +56,7 @@ function startGame()
     isUserShooter = true;
     isGameStarted = true;
     botProgress.innerText = userProgress.innerText = "";
-    shooterTurn.innerHTML = "&#128100";
+    shooterTurn.style.backgroundImage = `url(${userIcon})`;
 
     updateScore();
     updateGoalStatus("Click on the goal post to shoot!");
@@ -70,8 +68,7 @@ function startGame()
 }
 
 // a function to handle the ball direction click
-function handleBallDirectionClick(event)
-{
+function handleBallDirectionClick(event) {
     // getting the clicked direction div
     let clickedDirection = event.target;
     clickedDirection.classList.add("selected-direction");
@@ -82,13 +79,11 @@ function handleBallDirectionClick(event)
     // getting the shooter's and the keeper's choices
     let shooterChoice, keeperChoice;
 
-    if (isUserShooter)
-    {
+    if (isUserShooter) {
         shooterChoice = clickedDirection.id;
         keeperChoice = getRandomDirection();
     }
-    else
-    {
+    else {
         shooterChoice = getRandomDirection();
         keeperChoice = clickedDirection.id;
     }
@@ -97,62 +92,50 @@ function handleBallDirectionClick(event)
 }
 
 // a function to animate the football
-function animateFootball(shooterChoice, keeperChoice)
-{
+function animateFootball(shooterChoice, keeperChoice) {
     // setting the football's position to the shooter's choice
     football.classList.add(shooterChoice);
     keeper.classList.add(keeperChoice);
 
     // timeout to move the football to chosen position
-    setTimeout(function()
-    {
-        if (shooterChoice === "middle")
-        {
+    setTimeout(function () {
+        if (shooterChoice === "middle") {
             keeper.classList.remove(keeperChoice);
             football.classList.remove(shooterChoice);
             football.classList.add("middle");
         }
-        else if (shooterChoice === "left")
-        {
+        else if (shooterChoice === "left") {
             keeper.classList.remove(keeperChoice);
             football.classList.remove(shooterChoice);
             football.classList.add("left");
         }
-        else
-        {
+        else {
             keeper.classList.remove(keeperChoice);
             football.classList.remove(shooterChoice);
             football.classList.add("right");
         }
 
         // another timeout to check the result
-        setTimeout(function()
-        {
+        setTimeout(function () {
             // checking if it's a goal or a save
-            if (shooterChoice === keeperChoice)
-            {
-                if (isUserShooter)
-                {
+            if (shooterChoice === keeperChoice) {
+                if (isUserShooter) {
                     updateGoalStatus("what a save from the bot..!");
                     userProgress.innerHTML += span("❌");
                 }
-                else
-                {
+                else {
                     updateGoalStatus("you saved it.. wow!");
                     botProgress.innerHTML += span("❌");
                 }
             }
-            else
-            {
+            else {
                 // updating the score
-                if (isUserShooter)
-                {
+                if (isUserShooter) {
                     updateGoalStatus("it's in..!");
                     userProgress.innerHTML += span("⚽");
                     userScore++;
                 }
-                else
-                {
+                else {
                     updateGoalStatus("the bot scores..!");
                     botProgress.innerHTML += span("⚽");
                     botScore++;
@@ -163,17 +146,15 @@ function animateFootball(shooterChoice, keeperChoice)
             // reset the football's position
             football.classList.remove(shooterChoice);
 
-            if (isUserShooter)
-            {
-                shooterTurn.innerHTML = "&#128126";
+            if (isUserShooter) {
+                shooterTurn.style.backgroundImage = `url(${botIcon})`;
                 userTurn++;
             }
-            else
-            {
-                shooterTurn.innerHTML = "&#128100";
+            else {
+                shooterTurn.style.backgroundImage = `url(${userIcon})`;
                 botTurn++;
             }
-            
+
             resetBallDirections();
 
             // switching the roles
@@ -186,8 +167,7 @@ function animateFootball(shooterChoice, keeperChoice)
 }
 
 // a function to check if the game is over
-function checkGameOver()
-{
+function checkGameOver() {
     if (userScore > MAX_TURNS - botTurn + botScore || botScore > MAX_TURNS - userTurn + userScore) {
 
         isGameStarted = false;
@@ -199,8 +179,7 @@ function checkGameOver()
         hint.innerText = "";
         startButton.disabled = false;
     }
-    else
-    {
+    else {
         if (userTurn === MAX_TURNS && botTurn === MAX_TURNS && userScore === botScore) MAX_TURNS += 1;
 
         if (isUserShooter) hint.innerText = "let\'s see if you can put this one in..";

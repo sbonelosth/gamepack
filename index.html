@@ -24,16 +24,16 @@
         <h1>Rock Paper Scissors</h1>
         <div id="threshold">3</div>
         <div class="bot-choices">
-            <span class="avatar" id="bot-avatar">&#128126</span>
-            <span class="bot-choice" id="bot-rock">&#9994</span>
-            <span class="bot-choice" id="bot-paper">&#9995</span>
-            <span class="bot-choice" id="bot-scissor">&#9996</span>
+            <span class="avatar" id="bot-avatar"></span>
+            <span class="bot-choice" id="bot-rock"></span>
+            <span class="bot-choice" id="bot-paper"></span>
+            <span class="bot-choice" id="bot-scissor"></span>
         </div>
-       <div class="choices">
-            <span class="choice" id="rock">&#9994</span>
-            <span class="choice" id="paper">&#9995</span>
-            <span class="choice" id="scissor">&#9996</span>
-            <span class="avatar" id="user-avatar">&#128100</span>
+        <div class="choices">
+            <span class="choice" id="rock"></span>
+            <span class="choice" id="paper"></span>
+            <span class="choice" id="scissor"></span>
+            <span class="avatar" id="user-avatar">00</span>
         </div>
 
         <div class="rps-outcome"></div>
@@ -58,7 +58,7 @@
             </span>
         </div>
     </main>
-    
+
     <main class="tabcontent" id="sudoku">
         <h1>Sudoku</h1>
         <div id="active-level"></div>
@@ -142,8 +142,8 @@
                 <div id="keeper-direction">🧤</div>
             </div>
         </div>
-        <div id="football">&#9917</div>
-        <div id="shooter-turn">&#128100</div>
+        <div id="football"></div>
+        <div id="shooter-turn"></div>
 
         <div class="actions shootout">
             <button id="start-shootout">start</button>
@@ -151,7 +151,8 @@
     </main>
 
     <div class="tablinks">
-        <img class="tablink active" src="./res/rock-paper-scissors.png" alt="thumbnail" onclick="openTab(event, 'rockpaperscissors')">
+        <img class="tablink active" src="./res/rock-paper-scissors.png" alt="thumbnail"
+            onclick="openTab(event, 'rockpaperscissors')">
         <img class="tablink" src="./res/tic-tac-toe.png" alt="thumbnail" onclick="openTab(event, 'tictactoe')">
         <img class="tablink" src="./res/sudoku.png" alt="thumbnail" onclick="openTab(event, 'sudoku')">
         <img class="tablink" src="./res/puzzle.png" alt="thumbnail" onclick="openTab(event, 'memory-game')">
