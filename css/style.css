@@ -31,11 +31,23 @@ body {
     height: 100vh;
 }
 
-#threshold {
+.cap-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.cap-container>p {
+    color: aliceblue;
+    font-size: medium;
+}
+
+#cap {
     color: aliceblue;
     width: 2rem;
     height: 2rem;
-    margin: 2rem auto;
+    margin: 2rem 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,11 +140,25 @@ body {
 }
 
 .avatar {
-    font-size: 20px;
+    width: 2rem;
+    height: 2rem;
+    background-image: url('../res/user.svg');
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
-.result-emoji {
-    font-size: 18px;
+#bot-avatar {
+    background-image: url('../res/bot.svg');
+}
+
+#bot-choice-emoji,
+#user-choice-emoji {
+    width: 2rem;
+    height: 2rem;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
     margin: 0.4rem;
 }
 
@@ -153,10 +179,13 @@ body {
 
 .rps-score {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     color: aliceblue;
     margin: 2rem;
     font-size: large;
-    text-align: center;
 }
 
 .rotate-warning {
@@ -417,8 +446,11 @@ h1,
     cursor: pointer;
 }
 
-.actions {
+.actions,
+.reset-rounds {
     width: 100%;
+    position: fixed;
+    bottom: 5rem;
     display: flex;
     justify-content: center;
 }
@@ -430,8 +462,9 @@ h1,
 #memory-start-action,
 #memory-level-action,
 #start-shootout {
-    width: 70px;
-    height: 45px;
+    width: fit-content;
+    min-width: 80px;
+    padding: 1.2rem;
     background: transparent;
     border: 0;
     outline: 1px solid #169bf3;
@@ -481,6 +514,9 @@ button:disabled {
     height: 56px;
     cursor: pointer;
     margin: 2px;
+    color: aliceblue;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .card-front,
@@ -570,7 +606,7 @@ button:disabled {
 
 .score-display {
     width: 25%;
-    min-width: 10rem;
+    min-width: 8rem;
     height: 2rem;
     display: flex;
     flex-direction: row;
@@ -637,13 +673,19 @@ button:disabled {
 }
 
 #keeper-direction {
-    height: 8rem;
+    width: 4rem;
+    height: 4rem;
     position: absolute;
     font-size: 3em;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    transform: translateX(5rem) translateY(-2rem);
+    transform: translateX(5rem) translateY(2rem);
+    background-image: url('../res/goalie.svg');
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+
 }
 
 #football {
@@ -716,31 +758,31 @@ button:disabled {
 
 @keyframes keepertoleft {
     from {
-        transform: translateX(5rem) translateY(-2rem);
+        transform: translateX(5rem) translateY(2rem);
     }
 
     to {
-        transform: translateX(0) translateY(-2rem);
+        transform: translateX(0) translateY(2rem);
     }
 }
 
 @keyframes keepertomiddle {
     from {
-        transform: translateX(5rem) translateY(-2rem);
+        transform: translateX(5rem) translateY(2rem);
     }
 
     to {
-        transform: translateX(5rem) translateY(-2rem);
+        transform: translateX(5rem) translateY(2rem);
     }
 }
 
 @keyframes keepertoright {
     from {
-        transform: translateX(5rem) translateY(-2rem);
+        transform: translateX(5rem) translateY(2rem);
     }
 
     to {
-        transform: translateX(10rem) translateY(-2rem);
+        transform: translateX(10rem) translateY(2rem);
     }
 }
 

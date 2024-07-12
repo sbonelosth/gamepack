@@ -22,7 +22,11 @@
     </div>
     <main class="tabcontent" id="rockpaperscissors">
         <h1>Rock Paper Scissors</h1>
-        <div id="threshold">3</div>
+        <div class="cap-container">
+            <p>one to reach</p>
+            <div id="cap">3</div>
+            <p>first, wins</p>
+        </div>
         <div class="bot-choices">
             <span class="avatar" id="bot-avatar"></span>
             <span class="bot-choice" id="bot-rock"></span>
@@ -33,12 +37,12 @@
             <span class="choice" id="rock"></span>
             <span class="choice" id="paper"></span>
             <span class="choice" id="scissor"></span>
-            <span class="avatar" id="user-avatar">00</span>
+            <span class="avatar" id="user-avatar"></span>
         </div>
 
         <div class="rps-outcome"></div>
         <div class="rps-score"></div>
-        <p class="reset-rounds">reset</p>
+        <p class="reset-rounds">reset score</p>
     </main>
     <main class="tabcontent" id="tictactoe">
 
@@ -123,9 +127,9 @@
             <div class="shootout-progress user" id="user-progress">
             </div>
             <div class="score-display">
-                <span class="avatar" id="user-avatar">&#128100</span>
+                <span class="avatar" id="user-avatar"></span>
                 <span id="shootout-score">0 : 0</span>
-                <span class="avatar" id="user-avatar">&#128126</span>
+                <span class="avatar" id="bot-avatar"></span>
             </div>
             <div class="shootout-progress bot" id="bot-progress">
             </div>
@@ -139,7 +143,7 @@
                 <span class="ball-direction" id="left"></span>
                 <span class="ball-direction" id="middle"></span>
                 <span class="ball-direction" id="right"></span>
-                <div id="keeper-direction">🧤</div>
+                <div id="keeper-direction"></div>
             </div>
         </div>
         <div id="football"></div>

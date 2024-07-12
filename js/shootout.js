@@ -124,7 +124,7 @@ function animateFootball(shooterChoice, keeperChoice) {
                     userProgress.innerHTML += span("❌");
                 }
                 else {
-                    updateGoalStatus("you saved it.. wow!");
+                    updateGoalStatus("you saved it..!");
                     botProgress.innerHTML += span("❌");
                 }
             }

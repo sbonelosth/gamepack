@@ -5,23 +5,22 @@ const id = sel => { return document.getElementById(sel); };
 let choices = qa(".choice");
 let botChoices = qa(".bot-choice");
 let score = q(".rps-score");
-let threshold = q("#threshold");
+let capScore = q("#cap");
 
 let choiceList = ["rock", "paper", "scissor"];
 let userScore = 0, botScore = 0;
 let resetRounds = q(".reset-rounds");
 let input = null;
 
-resetRounds.addEventListener("click", () =>
-{
+resetRounds.addEventListener("click", () => {
     input = prompt("New target score:");
-    threshold.textContent = input;
+    capScore.textContent = input;
 });
 
+let choiceListIcons = ['../res/rock.svg', '../res/paper.svg', '../res/scissor.svg'];
 let botChoice, userChoice;
 
-function makeChoice(e, choice)
-{
+function makeChoice(e, choice) {
     let maxScore = (input === null || input === "") ? 3 : parseInt(input);
 
     for (i = 0; i < choices.length; i++)
@@ -34,96 +33,79 @@ function makeChoice(e, choice)
     var i, outcome;
     outcome = q(".rps-outcome");
 
-    if (choice === choiceList[bot])
-    {
+    if (choice === choiceList[bot]) {
         outcome.innerHTML = "It's a tie";
-        botChoice = `${9994 + bot}`;
+        botChoice = choiceListIcons[bot];
         userChoice = botChoice;
         e.currentTarget.classList.add("grey");
         q("#bot-" + choice).classList.add("grey");
     }
-    else if (choice === "rock")
-    {
-        userChoice = 9994;
-        if (choiceList[bot] === "paper")
-        {
+    else if (choice === "rock") {
+        userChoice = choiceListIcons[0];
+        if (choiceList[bot] === "paper") {
             outcome.innerHTML = "Plus 1 for the Bot";
-            botChoice = 9995;
+            botChoice = choiceListIcons[1];
             botScore++;
             e.currentTarget.classList.add("red");
             q("#bot-paper").classList.add("green");
         }
-        else
-        {
+        else {
             outcome.innerHTML = "Plus 1 for You";
-            botChoice = 9996;
+            botChoice = choiceListIcons[2];
             userScore++;
             e.currentTarget.classList.add("green");
             q("#bot-scissor").classList.add("red");
         }
     }
-    else if (choice === "paper")
-    {
-        userChoice = 9995;
-        if (choiceList[bot] === "rock")
-        {
+    else if (choice === "paper") {
+        userChoice = choiceListIcons[1];
+        if (choiceList[bot] === "rock") {
             outcome.innerHTML = "Plus 1 for You";
-            botChoice = 9994;
+            botChoice = choiceListIcons[0];
             userScore++;
             e.currentTarget.classList.add("green");
             q("#bot-rock").classList.add("red");
         }
-        else
-        {
+        else {
             outcome.innerHTML = "Plus 1 for the Bot";
-            botChoice = 9996;
+            botChoice = choiceListIcons[2];
             botScore++;
             e.currentTarget.classList.add("red");
             q("#bot-scissor").classList.add("green");
         }
     }
-    else if (choice === "scissor")
-    {
-        userChoice = 9996;
-        if (choiceList[bot] === "rock")
-        {
+    else if (choice === "scissor") {
+        userChoice = choiceListIcons[2];
+        if (choiceList[bot] === "rock") {
             outcome.innerHTML = "Plus 1 for the Bot";
-            botChoice = 9994;
+            botChoice = choiceListIcons[0];
             botScore++;
             e.currentTarget.classList.add("red");
             q("#bot-rock").classList.add("green");
         }
-        else
-        {
+        else {
             outcome.innerHTML = "Plus 1 for You";
-            botChoice = 9995;
+            botChoice = choiceListIcons[1];
             userScore++;
             e.currentTarget.classList.add("green");
             q("#bot-paper").classList.add("red");
         }
     }
-    score.innerHTML = `<span class="result-emoji">&#${botChoice}</span> Bot [ ${botScore} ] : [ ${userScore} ] Me <span class="result-emoji">&#${userChoice}</span>`;
+    score.innerHTML = `<span id="bot-choice-emoji" style="background-image:url('${botChoice}')"></span><span>[ ${botScore} ] : [ ${userScore} ]</span><span id="user-choice-emoji" style="background-image:url('${userChoice}')"></span>`;
 
-    let loss = [128169, 129313, 128528, 128128, 129324, 127770];
-    let win = [128526, 128520, 129393, 129398, 128226, 127942];
-    let rand = Math.floor(Math.random() * 6);
-
-    if (botScore == maxScore || userScore == maxScore)
-    {
-        outcome.innerHTML = (botScore > userScore) ? `Yikes, the bot wins <span class="result-emoji">&#${loss[rand]}</span>` : `A win is a win <span class="result-emoji">&#${win[rand]}</span>`;
+    if (botScore == maxScore || userScore == maxScore) {
+        outcome.innerHTML = (botScore > userScore) ? `the bot wins this round` : `a win is a win`;
         botScore = userScore = 0;
     }
 }
 
-choices.forEach(choice =>
-{
+choices.forEach(choice => {
     choice.addEventListener("click", (event) => {
         makeChoice(event, choice.getAttribute("id"));
     });
 });
 
-function openTab(e, tabName)
-{
+function openTab(e, tabName) {
     let i, tablinks, tabcontent;
     tabcontent = qa(".tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -143,8 +125,7 @@ function openTab(e, tabName)
 const mediaQuery = window.matchMedia(' (min-width: 768px)');
 
 // an orientation detect-and-act function
-function handleMediaChange(e)
-{
+function handleMediaChange(e) {
     if (e.matches) // landscape view 
     {
         qa(".tabcontent").forEach(tab => {

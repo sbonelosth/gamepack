@@ -3,24 +3,22 @@ import { reshuffle, mapValue } from './memory-module.js';
 const id = (sel) => { return document.getElementById(sel); };
 const qa = (sel) => { return document.querySelectorAll(sel); };
 
-window.addEventListener("DOMContentLoaded", () =>
-{
+window.addEventListener("DOMContentLoaded", () => {
     widgets.startAction.setAttribute("disabled", true);
     widgets.levelAction.addEventListener("click", memoryLevelPick);
     widgets.result.innerText = "Pick a level then start flipping";
 });
 
-const resultText = (totalFlips, dimensions) =>
-{
+const resultText = (totalFlips, dimensions) => {
     let totalCards = dimensions * dimensions;
     let rating = (mapValue(totalFlips, totalCards, 4 * totalCards, 100, -100)).toFixed(0);
-    
+
     if (dimensions >= 4 && rating >= 75)
-        return  `Rating: ${rating}%<br><br>You're incredible. Well done. 👏`;
+        return `Rating: ${rating}%<br><br>You're incredible. Well done.`;
     else if (dimensions === 2 && rating >= 90)
-        return  `Rating: ${rating}%<br><br>You did it. Well done.  👏`;
+        return `Rating: ${rating}%<br><br>You did it. Well done.`;
     else
-        return  `Rating: ${rating}%<br><br>Keep on trying 👏`;
+        return `Rating: ${rating}%<br><br>Keep trying`;
 };
 
 const widgets = {
@@ -41,16 +39,14 @@ const state = {
     loop: null
 };
 
-function createGame(dimensions)
-{
+function createGame(dimensions) {
     if (dimensions % 2 !== 0) throw new Error("The dimension of the board must be an even number.");
 
     widgets.board.style.gridTemplateColumns = `repeat(${dimensions}, auto)`;
 
     const items = reshuffle(dimensions);
 
-    for (let i = 0; i < items.length; i++)
-    {
+    for (let i = 0; i < items.length; i++) {
         const card = document.createElement("div");
         card.classList.add("card-holder");
 
@@ -78,42 +74,36 @@ function flipCardHandler(event) {
     widgets.levelAction.setAttribute("disabled", true);
 }
 
-function startGameHandler()
-{
+function startGameHandler() {
     startGame();
     widgets.levelAction.setAttribute("disabled", true);
 }
 
-function attachEventListeners()
-{
+function attachEventListeners() {
     qa(".card-holder").forEach(card => {
         card.addEventListener("click", flipCardHandler);
     });
-    
+
     widgets.startAction.addEventListener("click", startGameHandler);
 }
 
-function detachCardListeners()
-{
+function detachCardListeners() {
     qa(".card-holder").forEach(card => {
         card.removeEventListener("click", flipCardHandler);
     });
 }
 
 
-function startGame()
-{
+function startGame() {
     state.gameStarted = true;
     widgets.startAction.setAttribute("disabled", true);
     widgets.result.innerHTML = "";
 
     let minutes = 0;
-    state.loop = setInterval(() =>
-    {
+    state.loop = setInterval(() => {
         state.seconds++;
 
-        if (state.seconds == 60)
-        {
+        if (state.seconds == 60) {
             minutes++;
             state.seconds = 0;
         }
@@ -124,10 +114,8 @@ function startGame()
     }, 1000);
 }
 
-function flipCard(card)
-{
-    if (!card.classList.contains("flipped") && !card.classList.contains("matched"))
-    {
+function flipCard(card) {
+    if (!card.classList.contains("flipped") && !card.classList.contains("matched")) {
         state.flippedCards++;
         state.totalFlips++;
 
@@ -138,12 +126,10 @@ function flipCard(card)
         if (state.flippedCards <= 2)
             card.classList.add("flipped");
 
-        if (state.flippedCards === 2)
-        {
+        if (state.flippedCards === 2) {
             const flippedCards = qa(".flipped:not(.matched)");
 
-            if (flippedCards[0].innerText === flippedCards[1].innerText)
-            {
+            if (flippedCards[0].innerText === flippedCards[1].innerText) {
                 flippedCards[0].classList.add("matched");
                 flippedCards[1].classList.add("matched");
                 detachCardListeners();
@@ -155,8 +141,7 @@ function flipCard(card)
             }, 1000);
         }
 
-        if (!qa(".card-holder:not(.flipped)").length)
-        {
+        if (!qa(".card-holder:not(.flipped)").length) {
             clearInterval(state.loop);
 
             setTimeout(() => {
@@ -165,8 +150,7 @@ function flipCard(card)
                 });
             }, 2000);
 
-            setTimeout(() =>
-            {
+            setTimeout(() => {
                 widgets.result.innerHTML = resultText(state.totalFlips, state.dimensions);
 
                 qa(".card-holder.matched").forEach(card => {
@@ -186,54 +170,46 @@ function flipCard(card)
 }
 
 
-function flipBackCards()
-{
+function flipBackCards() {
     qa(".card-holder:not(.matched)").forEach(card => {
         card.classList.remove("flipped");
     });
-    
+
     detachCardListeners();
-    
+
     state.flippedCards = 0;
 }
 
-function memoryLevelPick()
-{
+function memoryLevelPick() {
     widgets.levelAction.classList.add("started");
     id("memory-level-wrapper").style.display = "flex";
     const levels = document.getElementsByClassName("memory-level");
-    for (let i = 0; i < levels.length; i++)
-    {
-        levels[i].addEventListener("click", (e) =>
-        {
-            if (e.currentTarget)
-            {
+    for (let i = 0; i < levels.length; i++) {
+        levels[i].addEventListener("click", (e) => {
+            if (e.currentTarget) {
                 resetGame();
                 let DELAY;
                 const activeLevel = e.currentTarget.className;
-                if (activeLevel.slice(13) === "easy")
-                {
+                if (activeLevel.slice(13) === "easy") {
                     state.dimensions = 2;
                     createGame(2);
                     DELAY = 0;
                 }
-                else if (activeLevel.slice(13) === "fair")
-                {
+                else if (activeLevel.slice(13) === "fair") {
                     state.dimensions = 4;
                     createGame(4);
                     DELAY = 1200;
                 }
-                else
-                {
+                else {
                     state.dimensions = 6;
                     createGame(6);
                     DELAY = 2000;
                 }
-                
+
                 qa(".card-holder").forEach(card => {
                     card.classList.add("flipped");
                 });
-                
+
                 setTimeout(() => {
                     qa(".card-holder").forEach(card => {
                         card.classList.remove("flipped");
@@ -248,8 +224,7 @@ function memoryLevelPick()
     }
 }
 
-function resetGame()
-{
+function resetGame() {
     state.gameStarted = false;
     state.flippedCards = 0;
     state.totalFlips = 0;

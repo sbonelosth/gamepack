@@ -1,13 +1,13 @@
 import { findBestMove } from "./minimax.js";
 
 const cross = Object.assign(new Image(), {
-    src: "./res/cross.svg",
+    src: "../res/cross.svg",
     id: "icon-cross",
     draggable: false
 });
 
 const circle = Object.assign(new Image(), {
-    src: "./res/circle.svg",
+    src: "../res/circle.svg",
     id: "icon-circle",
     draggable: false
 });
@@ -15,14 +15,14 @@ const circle = Object.assign(new Image(), {
 const DELAY = 3000;
 
 const rules = [
-   [0, 1, 2],
-   [3, 4, 5],
-   [6, 7, 8],
-   [0, 3, 6],
-   [1, 4, 7],
-   [2, 5, 8],
-   [0, 4, 8],
-   [2, 4, 6]
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
 ];
 
 
@@ -31,24 +31,21 @@ let currentPlayer = "human";
 let gameFrozen = false;
 let gameMode = "human vs bot";
 
-for (let index = 0; index < 9; index++)
-{
+for (let index = 0; index < 9; index++) {
     const cell = document.createElement("div");
     document.getElementById("tac-board").appendChild(cell);
     cell.appendChild(new Image());
     cell.id = cell.style.gridArea = `C${index}`;
     cell.className = "tac-cell";
-    cell.addEventListener("mousedown", () =>
-    {
+    cell.addEventListener("mousedown", () => {
         if (grid[index].length > 0 || gameFrozen) return;
-        
+
         grid[index] = currentPlayer;
-        currentPlayer = currentPlayer == "human" ? "bot" : "human";
-        
+        currentPlayer = currentPlayer === "human" ? "bot" : "human";
+
         renderToDOM();
 
-        if (gameMode == "human vs bot")
-        {
+        if (gameMode == "human vs bot") {
             update();
             pickAIMove();
             renderToDOM();
@@ -57,30 +54,25 @@ for (let index = 0; index < 9; index++)
     });
 }
 
-function renderToDOM()
-{
-    for (let i = 0; i < 9; i++)
-    {
+function renderToDOM() {
+    for (let i = 0; i < 9; i++) {
         const cell = document.getElementById(`C${i}`);
         if (cell.childNodes[0])
             cell.removeChild(cell.childNodes[0]);
-        
-        if (grid[i] != "")
-        {
+
+        if (grid[i] != "") {
             cell.appendChild({
                 "human": cross,
                 "bot": circle
-            } [grid[i]].cloneNode(false));
+            }[grid[i]].cloneNode(false));
         }
     }
 }
 
 function print(value) { document.getElementById("tac-result").innerHTML = value; }
 
-function checkWin()
-{
-    for (let i = 0; i < 8; i++)
-    {
+function checkWin() {
+    for (let i = 0; i < 8; i++) {
         const rule = rules[i];
         if (!grid[rule[0]] == "" &&
             grid[rule[0]] == grid[rule[1]] &&
@@ -100,11 +92,9 @@ function checkWin()
     };
 }
 
-function reset()
-{
+function reset() {
     print("loading...");
-    setTimeout(() =>
-    {
+    setTimeout(() => {
         gameFrozen = false;
         grid = new Array(9).fill("");
         currentPlayer = "human";
@@ -113,44 +103,36 @@ function reset()
     }, DELAY / 3);
 }
 
-function update()
-{
+function update() {
     const gameState = checkWin();
-    
-    if (gameState.finished && !gameState.tie)
-    {
+
+    if (gameState.finished && !gameState.tie) {
         gameFrozen = true;
         if (gameState.winner === "human")
-            print(`a win is a win<span class="result-emoji">&#128526</span>`);
+            print(`a win is a win`);
         else
-            print(`the bot wins<span class="result-emoji">&#128169</span>`);
+            print(`the bot wins this round`);
 
-        for (let index = 0; index < 9; index++)
-        {
-            if (!gameState.winCase.includes(index))
-            {
+        for (let index = 0; index < 9; index++) {
+            if (!gameState.winCase.includes(index)) {
                 let icon = document.getElementById(`C${index}`).childNodes[0];
                 if (icon) icon.style.filter = "invert(1) brightness(.2)";
             }
         }
         setTimeout(reset, DELAY);
     }
-    else if (gameState.tie)
-    {
+    else if (gameState.tie) {
         gameFrozen = true;
         print("well, it\'s a tie");
         setTimeout(reset, DELAY);
     }
 }
 
-function pickAIMove()
-{
-    if (currentPlayer == "bot" && !gameFrozen)
-    {
+function pickAIMove() {
+    if (currentPlayer == "bot" && !gameFrozen) {
         gameFrozen = true;
         currentPlayer = "human";
-        setTimeout(() =>
-        {
+        setTimeout(() => {
             grid[findBestMove(grid)] = "bot";
             gameFrozen = false;
             renderToDOM();
@@ -159,8 +141,7 @@ function pickAIMove()
     }
 }
 
-document.getElementById("tac-players").addEventListener("mousedown", () =>
-{
+document.getElementById("tac-players").addEventListener("mousedown", () => {
     const newGameMode = gameMode == "human vs bot" ? "human vs human" : "human vs bot";
     gameMode = newGameMode;
     document.getElementById("tac-players").textContent = newGameMode;
