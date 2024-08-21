@@ -121,6 +121,7 @@ function openTab(e, tabName) {
     e.currentTarget.className += " active";
 }
 
+/***
 // a media condition that targets viewports at least 768px wide
 const mediaQuery = window.matchMedia(' (min-width: 768px)');
 
@@ -141,3 +142,4 @@ function handleMediaChange(e) {
 }
 
 mediaQuery.addEventListener("change", handleMediaChange);
+***/

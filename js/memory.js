@@ -3,24 +3,6 @@ import { reshuffle, mapValue } from './memory-module.js';
 const id = (sel) => { return document.getElementById(sel); };
 const qa = (sel) => { return document.querySelectorAll(sel); };
 
-window.addEventListener("DOMContentLoaded", () => {
-    widgets.startAction.setAttribute("disabled", true);
-    widgets.levelAction.addEventListener("click", memoryLevelPick);
-    widgets.result.innerText = "Pick a level then start flipping";
-});
-
-const resultText = (totalFlips, dimensions) => {
-    let totalCards = dimensions * dimensions;
-    let rating = (mapValue(totalFlips, totalCards, 4 * totalCards, 100, -100)).toFixed(0);
-
-    if (dimensions >= 4 && rating >= 75)
-        return `Rating: ${rating}%<br><br>You're incredible. Well done.`;
-    else if (dimensions === 2 && rating >= 90)
-        return `Rating: ${rating}%<br><br>You did it. Well done.`;
-    else
-        return `Rating: ${rating}%<br><br>Keep trying`;
-};
-
 const widgets = {
     board: id("memory-board"),
     moves: id("memory-moves"),
@@ -30,6 +12,23 @@ const widgets = {
     result: id("memory-result")
 };
 
+window.addEventListener("DOMContentLoaded", () => {
+    widgets.startAction.setAttribute("disabled", true);
+    widgets.levelAction.addEventListener("click", memoryLevelPick);
+    widgets.result.innerText = "Pick a level then start flipping";
+});    
+
+const resultText = (totalFlips, dimensions) => {
+    let totalCards = dimensions * dimensions;
+    let rating = (mapValue(totalFlips, totalCards, 4 * totalCards, 100, -100)).toFixed(0);
+
+    if (dimensions >= 4 && rating >= 75)
+        return `Rating: ${rating}%<br><br>You're incredible. Well done.`;    
+    else if (dimensions === 2 && rating >= 90)
+        return `Rating: ${rating}%<br><br>You did it. Well done.`;    
+    else
+        return `Rating: ${rating}%<br><br>Keep trying`;
+};    
 const state = {
     dimensions: 0,
     gameStarted: false,
@@ -193,17 +192,17 @@ function memoryLevelPick() {
                 if (activeLevel.slice(13) === "easy") {
                     state.dimensions = 2;
                     createGame(2);
-                    DELAY = 0;
+                    DELAY = 500;
                 }
                 else if (activeLevel.slice(13) === "fair") {
                     state.dimensions = 4;
                     createGame(4);
-                    DELAY = 1200;
+                    DELAY = 5000;
                 }
                 else {
                     state.dimensions = 6;
                     createGame(6);
-                    DELAY = 2000;
+                    DELAY = 10000;
                 }
 
                 qa(".card-holder").forEach(card => {
