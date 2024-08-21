@@ -299,6 +299,9 @@ main#shootout {
     align-items: center;
     justify-content: center;
     margin: 3px;
+}
+
+.tac-cell:nth-child(2n) {
     box-shadow: 0 0 1px 1px #169bf3;
 }
 
