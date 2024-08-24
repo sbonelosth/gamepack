@@ -1,6 +1,6 @@
 # gamepack
 
-a collection of simple games requested by my little sister, which turned out to be good for the sake of keeping my mind busy. the game is not playable on landscape mode or any device screen other than a smartphone.
+a collection of simple games requested by my little sister, which turned out to be good for the sake of keeping my mind busy.
 
 🌐: https://gamepack.onrender.com
 
